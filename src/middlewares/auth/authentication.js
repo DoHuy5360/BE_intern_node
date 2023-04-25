@@ -2,7 +2,6 @@ import pool from "../../database/connect.js";
 import { generateJWT } from "../../jwt/jwtHandler.js";
 import bcrypt from "bcryptjs";
 const authentication = (req, res, next) => {
-	console.log(1);
 	const { email, password } = req.body;
 
 	pool.query(

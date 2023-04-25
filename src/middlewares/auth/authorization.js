@@ -1,27 +1,34 @@
 import { verifyJWT } from "../../jwt/jwtHandler.js";
 
-const authorization = (req, res, next) => {
+const adminAuthorization = (req, res, next) => {
+	const roles = ["Admin"];
+	handleRequest(req, next, res, roles);
+};
+const userAuthorization = (req, res, next) => {
+	const roles = ["Admin", "User"];
+	handleRequest(req, next, res, roles);
+};
+
+function handleRequest(req, next, res, roles) {
 	const bearer = req.headers["authorization"];
 	if (bearer) {
 		const token = bearer.split(" ")[1];
 		try {
 			const { isExpires, content } = verifyJWT(token);
-			console.log(content);
 			if (isExpires) {
-				if ((content.account_role = "Manager")) {
+				if (roles.includes(content.accountRole)) {
 					next();
 				} else {
-					console.log("Invalid Role");
+					res.send("Invalid Role");
 				}
 			} else {
-				console.log("Token Expired");
+				res.send("Token Expired");
 			}
 		} catch (err) {
-			console.error(err);
+			res.send(err.toString());
 		}
 	} else {
-		console.log("Missing Token");
+		res.send("Missing Token");
 	}
-};
-
-export default authorization;
+}
+export { adminAuthorization, userAuthorization };

@@ -1,4 +1,4 @@
-import authorization from "./auth/authorization.js";
 import authentication from "./auth/authentication.js";
+import { adminAuthorization, userAuthorization } from "./auth/authorization.js";
 
-export { authentication, authorization };
+export { authentication, adminAuthorization, userAuthorization };
