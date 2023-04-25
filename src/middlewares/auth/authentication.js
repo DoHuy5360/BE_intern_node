@@ -1,6 +1,7 @@
 import pool from "../../database/connect.js";
 import { generateJWT } from "../../jwt/jwtHandler.js";
-import bcrypt from "bcryptjs";
+import { bcryptCompare } from "../../script/enScriptHandler.js";
+
 const authentication = (req, res, next) => {
 	const { email, password } = req.body;
 
@@ -16,14 +17,9 @@ const authentication = (req, res, next) => {
 				return;
 			}
 			const record = records.rows[0];
-			// const saltRounds = 10;
 
-			// const salt = bcrypt.genSaltSync(saltRounds);
-			// const hashedPassword = bcrypt.hashSync(password, salt);
-			// console.log(hashedPassword);
 			const { account_id, account_role, account_password } = record;
-			const isMatch = bcrypt.compareSync(password, account_password);
-			if (isMatch) {
+			if (bcryptCompare(password, account_password)) {
 				const payload = {
 					employeeId: account_id,
 					accountRole: account_role,
