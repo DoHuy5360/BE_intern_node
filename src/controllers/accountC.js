@@ -2,6 +2,9 @@ import pool from "../database/connect.js";
 import { bcryptEncoder } from "../script/enScriptHandler.js";
 import { getTimeZ } from "../script/timeProvider.js";
 import { uuidPrefix } from "../script/IdProvider.js";
+import CRUDTemplate from "../database/curdTemplate.js";
+
+const curdBlueprint = new CRUDTemplate("account");
 
 function logAndSkip(err) {
 	if (err) {
@@ -11,9 +14,8 @@ function logAndSkip(err) {
 }
 
 const showAll = (req, res) => {
-	pool.query("SELECT * FROM account", (err, records) => {
-		logAndSkip(err);
-		res.json(records.rows);
+	curdBlueprint.readAll((records) => {
+		res.send(records);
 	});
 };
 
