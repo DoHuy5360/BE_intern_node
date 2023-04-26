@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import { indexR, accountR, loginR } from "./routes/routesPort.js";
+import { indexR, accountR, loginR, employeeR, headquarterR, workScheduleR } from "./routes/routesPort.js";
 import { adminAuthorization, authentication, userAuthorization } from "./middlewares/middlewarePort.js";
 import bodyParser from "body-parser";
 const corsOption = {
@@ -13,6 +13,9 @@ app.use(cors(corsOption));
 app.use("/api/v2/login", authentication, loginR);
 app.use("/api/v2/index", userAuthorization, indexR);
 app.use("/api/v2/account", adminAuthorization, accountR);
+app.use("/api/v2/employee", adminAuthorization, employeeR);
+app.use("/api/v2/headquarter", adminAuthorization, headquarterR);
+app.use("/api/v2/workSchedule", adminAuthorization, workScheduleR);
 
 const PORT = process.env.PORT || 8998;
 
