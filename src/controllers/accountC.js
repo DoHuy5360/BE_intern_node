@@ -4,7 +4,7 @@ import { getTimeZ } from "../script/timeProvider.js";
 import { uuidPrefix } from "../script/IdProvider.js";
 import CRUDTemplate from "../database/curdTemplate.js";
 
-const curdBlueprint = new CRUDTemplate("account");
+const curdTemplate = new CRUDTemplate("account");
 
 function logAndSkip(err) {
 	if (err) {
@@ -13,70 +13,42 @@ function logAndSkip(err) {
 	}
 }
 
-const showAll = (req, res) => {
-	curdBlueprint.readAll((records) => {
-		res.send(records);
-	});
+const showAll = async (req, res) => {
+	res.json(await curdTemplate.readAll());
 };
 
-const showOne = (req, res) => {
+const showOne = async (req, res) => {
 	const accountId = req.params.accountId;
-	pool.query(`SELECT * FROM account WHERE account_id = '${accountId}' LIMIT 1`, (err, records) => {
-		logAndSkip(err);
-		res.json(records.rows[0]);
-	});
+	res.json(await curdTemplate.readById(accountId));
 };
 
-const updateOne = (req, res) => {
+const updateOne = async (req, res) => {
 	const { accountEmail, accountPassword, accountRole } = req.body;
 	const accountId = req.params.accountId;
-	pool.query(
-		`UPDATE 
-			account 
-		SET 
-			account_email='${accountEmail}',
-			account_password='${bcryptEncoder(accountPassword)}',
-			account_role='${accountRole}'
-		WHERE 
-			account_id='${accountId}'
-		`,
-		(err, records) => {
-			logAndSkip(err);
-			res.send(records.rowCount.toString());
-		}
+	res.json(
+		await curdTemplate.updateById(accountId, {
+			account_email: accountEmail,
+			account_password: bcryptEncoder(accountPassword),
+			account_role: accountRole,
+		})
 	);
 };
-const deleteOne = (req, res) => {
+const deleteOne = async (req, res) => {
 	const accountId = req.params.accountId;
-	pool.query(`DELETE FROM account WHERE account_id='${accountId}'`, (err, records) => {
-		logAndSkip(err);
-		res.send(records.rowCount.toString());
-	});
+	res.json(await curdTemplate.deleteById(accountId));
 };
-const createOne = (req, res) => {
+const createOne = async (req, res) => {
+	//* ::INTEGER ( Varchar -> int )
 	const { accountEmail, accountPassword, accountRole } = req.body;
-	pool.query(
-		`INSERT INTO 
-		account (
-			account_id,
-			account_email,
-			account_password,
-			account_role,
-			create_at,
-			update_at
-		) 
-		VALUES (
-			'${uuidPrefix("TK")}',
-			'${accountEmail}',
-			'${bcryptEncoder(accountPassword)}',
-			'${accountRole}',
-			'${getTimeZ()}',
-			'${getTimeZ()}'
-			)`,
-		(err, records) => {
-			logAndSkip(err);
-			res.send(records.rowCount.toString());
-		}
+	res.json(
+		await curdTemplate.create({
+			account_id: uuidPrefix("TK"),
+			account_email: accountEmail,
+			account_password: bcryptEncoder(accountPassword),
+			account_role: accountRole,
+			create_at: getTimeZ(),
+			update_at: getTimeZ(),
+		})
 	);
 };
 const method3 = (req, res) => {};

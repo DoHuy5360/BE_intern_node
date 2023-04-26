@@ -4,57 +4,67 @@ class CRUDTemplate {
 	constructor(entityName) {
 		this.name = entityName;
 	}
-	handler(raw, callback) {
-		pool.query(raw, (err, records) => {
-			if (err) {
-				console.log(err);
-				return;
-			}
-			callback(records);
+	handler(raw) {
+		return new Promise((resolve, reject) => {
+			pool.query(raw, (err, records) => {
+				err ? console.log(err) : resolve(records);
+			});
 		});
 	}
-	create(objData) {
-		this.handler(
+	async create(objData) {
+		const result = await this.handler(
 			`INSERT INTO 
             ${this.name} (
-                ${formatBodyCreateQuery(Object.keys(objData))}
+                ${formatKeyBodyCreateQuery(Object.keys(objData))}
             ) 
             VALUES (
-                ${formatBodyCreateQuery(Object.values(objData))}
+                ${formatValueBodyCreateQuery(Object.values(objData))}
                 )`,
 			(records) => {
 				return records.rowCount.toString();
 			}
 		);
+		return {
+			status: 200,
+			stored: result.rowCount,
+		};
 	}
-	readAll(callback) {
-		this.handler(`SELECT * FROM ${this.name}`, (records) => {
-			callback(records.rows);
-		});
+	async readAll() {
+		const result = await this.handler(`SELECT * FROM ${this.name}`);
+		return {
+			status: 200,
+			numbers: result.rows.length,
+			records: result.rows,
+		};
 	}
-	readById(id) {
-		this.handler(`SELECT * FROM ${this.name} WHERE ${this.name}_id = '${id}' LIMIT 1`, (records) => {
-			return records.rows[0];
-		});
+	async readById(id) {
+		const result = await this.handler(`SELECT * FROM ${this.name} WHERE ${this.name}_id = '${id}' LIMIT 1`);
+		return {
+			status: 200,
+			records: result.rows,
+		};
 	}
-	updateById(id, objData) {
-		this.handler(
+	async updateById(id, objData) {
+		const result = await this.handler(
 			`UPDATE 
                 ${this.name} 
             SET 
                 ${formatBodyUpdateQuery(objData)}
             WHERE 
                 ${this.name}_id='${id}'
-            `,
-			(records) => {
-				return records.rowCount.toString();
-			}
+            `
 		);
+		return {
+			status: 200,
+			updated: result.rowCount,
+		};
 	}
-	deleteById(id) {
-		this.handler(`DELETE FROM ${this.name} WHERE ${this.name}_id='${id}'`, (records) => {
-			return records.rowCount.toString();
-		});
+	async deleteById(id) {
+		const result = await this.handler(`DELETE FROM ${this.name} WHERE ${this.name}_id='${id}'`);
+		return {
+			status: 200,
+			deteted: result.rowCount,
+		};
 	}
 }
 function formatBodyUpdateQuery(objData) {
@@ -65,10 +75,17 @@ function formatBodyUpdateQuery(objData) {
 	}
 	return sqlBody.slice(0, -1);
 }
-function formatBodyCreateQuery(arrayData) {
+function formatKeyBodyCreateQuery(arrayData) {
 	let tray = "";
 	arrayData.forEach((e) => {
 		tray += e + ",";
+	});
+	return tray.slice(0, -1);
+}
+function formatValueBodyCreateQuery(arrayData) {
+	let tray = "";
+	arrayData.forEach((e) => {
+		tray += `'${e}',`;
 	});
 	return tray.slice(0, -1);
 }
