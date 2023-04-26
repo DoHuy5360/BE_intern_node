@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { showAll, showOne, updateOne, deleteOne, createOne } from "../controllers/accountC.js";
+import { showAll, showOne, updateOne, deleteOne, createOne } from "../../controllers/entities/accountC.js";
 
 const accountR = Router();
 

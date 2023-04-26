@@ -8,6 +8,13 @@ const userAuthorization = (req, res, next) => {
 	const roles = ["Admin", "User"];
 	handleRequest(req, next, res, roles);
 };
+const userAuthorizationReloadPage = (req, res, next) => {
+	const roles = ["Admin", "User"];
+	const { token } = req.cookies;
+	req.headers.authorization = `Bearer ${token}`;
+	//todo: create multiple middleware
+	handleRequest(req, next, res, roles);
+};
 
 function handleRequest(req, next, res, roles) {
 	const bearer = req.headers["authorization"];
@@ -17,6 +24,7 @@ function handleRequest(req, next, res, roles) {
 			const { isExpires, content } = verifyJWT(token);
 			if (isExpires) {
 				if (roles.includes(content.accountRole)) {
+					// req.headers["Authorization"] = `Bearer ${token}`;
 					next();
 				} else {
 					res.send("Invalid Role");
@@ -31,4 +39,4 @@ function handleRequest(req, next, res, roles) {
 		res.send("Missing Token");
 	}
 }
-export { adminAuthorization, userAuthorization };
+export { adminAuthorization, userAuthorization, userAuthorizationReloadPage };

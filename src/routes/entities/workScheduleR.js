@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { showAll, showOne, updateOne, deleteOne, createOne } from "../controllers/workScheduleC.js";
+import { showAll, showOne, updateOne, deleteOne, createOne } from "../../controllers/entities/workScheduleC.js";
 
 const workScheduleR = Router();
 

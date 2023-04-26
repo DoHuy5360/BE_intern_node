@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { showAll, showOne, updateOne, deleteOne, createOne } from "../controllers/employeeC.js";
+import { showAll, showOne, updateOne, deleteOne, createOne } from "../../controllers/entities/employeeC.js";
 
 const employeeR = Router();
 

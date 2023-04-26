@@ -1,7 +1,7 @@
-import { bcryptEncoder } from "../script/enScriptHandler.js";
-import { getTimeZ } from "../script/timeProvider.js";
-import { uuidPrefix } from "../script/IdProvider.js";
-import CRUDTemplate from "../database/curdTemplate.js";
+import { bcryptEncoder } from "../../script/enScriptHandler.js";
+import { getTimeZ } from "../../script/timeProvider.js";
+import { uuidPrefix } from "../../script/IdProvider.js";
+import CRUDTemplate from "../../database/curdTemplate.js";
 
 const accountCURDTemplate = new CRUDTemplate("account");
 

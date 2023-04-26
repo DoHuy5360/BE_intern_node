@@ -1,6 +1,5 @@
 import { Router } from "express";
-import { showAll, showOne, updateOne, deleteOne, createOne } from "../controllers/headquarterC.js";
-
+import { showAll, showOne, updateOne, deleteOne, createOne } from "../../controllers/entities/headquarterC.js";
 const headquarterR = Router();
 
 headquarterR.get("/", showAll);
