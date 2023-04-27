@@ -1,48 +1,67 @@
-var canvas = document.getElementById("myCanvas");
-canvas.width = 500;
-const halfWidth = canvas.width - (150 + 100);
-canvas.style.outline = "1px solid #eaeaea";
-let numberOfRecords;
-var ctx = canvas.getContext("2d");
+import { horizontalBarChart } from "./utilities/chart.js";
 
-fetch("/api/v2/index/table/records", {
-	headers: {
-		Authorization: `Bearer ${localStorage.getItem("token")}`,
-	},
-})
-	.then((res) => res.json())
-	.then((data) => {
-		numberOfRecords = data.length;
-		//todo: Số lượng bản ghi x 40 ( Vị trí của y khi vẽ thanh ngang ) + 80 (Vị trí của thanh ngang đầu tiên)
-		canvas.height = numberOfRecords * 40 + 80;
-		const maxLimit = data[0].record;
-		data.forEach((row, idx) => {
-			createBar(ctx, row, idx + 1, maxLimit);
+function fetchData(url, callback) {
+	fetch(url, {
+		headers: {
+			Authorization: `Bearer ${localStorage.getItem("token")}`,
+		},
+	})
+		.then((res) => res.json())
+		.then((data) => {
+			callback(data);
 		});
-	});
-function createBar(ctx, row, idx, maxLimit) {
-	const proportion = halfWidth / maxLimit;
-	const y = (idx + 1) * 40;
-	ctx.beginPath();
-	const startX = 150;
-	ctx.moveTo(startX, y); //tọa độ điểm đầu
-	const endX = proportion * parseInt(row.record) + startX + 1;
-	ctx.lineTo(endX, y); //tọa độ điểm cuối
-	ctx.lineWidth = 30;
-	ctx.strokeStyle = randomColor();
-	ctx.stroke();
+}
+fetchData("/api/v2/index/table/records", (data) => {
+	const barChart = new horizontalBarChart("#noRecords", 500, 500);
+	barChart.setData(data, "record");
+	barChart.setBarFrameWidth(250);
+	barChart.setProportion();
+	barChart.setChartHeight(40, 80);
+	barChart.createBar("table", "record", 1, 40);
+	barChart.setLabel("Number of Records");
+});
+fetchData("/api/v2/index/table/headquarter/employee/count", (data) => {
+	const barChart = new horizontalBarChart("#noEmployee", 500, 500);
+	barChart.setData(data, "employee_count");
+	barChart.setBarFrameWidth(250);
+	barChart.setProportion();
+	barChart.setChartHeight(40, 80);
+	barChart.createBar("headquarter_name", "employee_count", 1, 40);
+	barChart.setLabel("Number of Employees");
+});
+// var canvas = document.getElementById("myPie");
+// canvas.width = 300;
+// canvas.height = 300;
+// canvas.style.outline = "1px solid #eaeaea";
+// var ctx = canvas.getContext("2d");
+// var centerX = canvas.width / 2;
+// var centerY = canvas.height / 2;
+// var radius = 100;
+// var part1Percent = 25;
+// var part2Percent = 35;
+// var part3Percent = 40;
 
-	ctx.font = "normal normal 16px Arial";
-	const textCenter = 5;
-	ctx.fillText(row.record, endX + 5, y + textCenter, 500);
-	ctx.fillText(row.table, 10, y + textCenter, 500);
-	ctx.fillText("Number of Records", 500 / 2 - 100, 40, 500);
-}
-function randomColor() {
-	const letters = "0123456789ABCDEF";
-	let color = "#";
-	for (let i = 0; i < 6; i++) {
-		color += letters[Math.floor(Math.random() * 16)];
-	}
-	return color;
-}
+// var part1Degrees = (part1Percent / 100) * 360;
+// var part2Degrees = (part2Percent / 100) * 360;
+// var part3Degrees = (part3Percent / 100) * 360;
+
+// // Part 1
+// ctx.beginPath();
+// ctx.moveTo(centerX, centerY);
+// ctx.arc(centerX, centerY, radius, 0, (part1Degrees * Math.PI) / 180);
+// ctx.fillStyle = "red";
+// ctx.fill();
+
+// // Part 2
+// ctx.beginPath();
+// ctx.moveTo(centerX, centerY);
+// ctx.arc(centerX, centerY, radius, (part1Degrees * Math.PI) / 180, ((part1Degrees + part2Degrees) * Math.PI) / 180);
+// ctx.fillStyle = "blue";
+// ctx.fill();
+
+// // Part 3
+// ctx.beginPath();
+// ctx.moveTo(centerX, centerY);
+// ctx.arc(centerX, centerY, radius, ((part1Degrees + part2Degrees) * Math.PI) / 180, ((part1Degrees + part2Degrees + part3Degrees) * Math.PI) / 180);
+// ctx.fillStyle = "green";
+// ctx.fill();

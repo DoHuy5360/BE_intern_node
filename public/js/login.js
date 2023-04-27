@@ -28,6 +28,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			})
 			.finally(() => {
 				const scriptTag = document.createElement("script");
+				scriptTag.type = "module";
 				scriptTag.src = "/js/admin.js";
 				document.body.appendChild(scriptTag);
 			});
