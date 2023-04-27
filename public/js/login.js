@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	const loginForm = document.getElementById("login-form");
 	const inpEmail = document.getElementById("email");
 	const inpPassword = document.getElementById("password");
-	const body = document.querySelector("body");
+	const htmlTag = document.querySelector("html");
 	loginForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		const fetchToken = await fetch("/api/v2/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: inpEmail.value, password: inpPassword.value }) })
@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 				document.cookie = `token=${data.token}; max-age=${second}; path=/; secure; SameSite=strict`;
 				return data.token;
 			});
-		const fetchHome = await fetch("/home", {
+		const fetchHome = await fetch("/admin", {
 			method: "POST",
 			headers: {
 				Authorization: `Bearer ${fetchToken}`,
@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", (e) => {
 		})
 			.then((res) => res.text())
 			.then((data) => {
-				body.innerHTML = data;
-				const newUrl = "/home";
+				htmlTag.innerHTML = data;
+				const newUrl = "/admin";
 				window.history.replaceState(null, "", newUrl);
 			});
 	});

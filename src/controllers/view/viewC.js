@@ -6,8 +6,8 @@ const loginPost = (req, res) => {
 	res.cookie("access_token", "your_access_token", { maxAge: 900000, httpOnly: true });
 };
 
-const home = (req, res) => {
-	res.render("home", { title: "Home", layout: "main" });
+const admin = (req, res) => {
+	res.render("admin", { title: "Admin", layout: "main" });
 };
 
-export { login, loginPost, home };
+export { login, loginPost, admin };
