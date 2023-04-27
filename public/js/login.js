@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	const inpEmail = document.getElementById("email");
 	const inpPassword = document.getElementById("password");
 	const htmlTag = document.querySelector("html");
+	const body = document.querySelector("body");
 	loginForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		const fetchToken = await fetch("/api/v2/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: inpEmail.value, password: inpPassword.value }) })
@@ -24,6 +25,11 @@ document.addEventListener("DOMContentLoaded", (e) => {
 				htmlTag.innerHTML = data;
 				const newUrl = "/admin";
 				window.history.replaceState(null, "", newUrl);
+			})
+			.finally(() => {
+				const scriptTag = document.createElement("script");
+				scriptTag.src = "/js/admin.js";
+				document.body.appendChild(scriptTag);
 			});
 	});
 });

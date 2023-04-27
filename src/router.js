@@ -39,7 +39,7 @@ app.use(express.static("public"));
 app.use("/", viewR);
 
 app.use("/api/v2/login", authentication, loginR);
-app.use("/api/v2/index", userAuthorization, indexR);
+app.use("/api/v2/index", adminAuthorization, indexR);
 app.use("/api/v2/account", adminAuthorization, accountR);
 app.use("/api/v2/employee", adminAuthorization, employeeR);
 app.use("/api/v2/headquarter", adminAuthorization, headquarterR);
