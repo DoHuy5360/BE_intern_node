@@ -10,4 +10,8 @@ const admin = (req, res) => {
 	res.render("admin", { title: "Admin", layout: "main" });
 };
 
-export { login, loginPost, admin };
+const employee = (req, res) => {
+	res.render("employee", { title: "View employees", layout: false });
+};
+
+export { login, loginPost, admin, employee };

@@ -4,7 +4,7 @@ import { showAll, showOne, updateOne, deleteOne, createOne } from "../../control
 const accountR = Router();
 
 accountR.get("/", showAll);
-accountR.get("/:accountId", showOne);
+accountR.get("/:accountId/show", showOne);
 accountR.post("/create", createOne);
 accountR.put("/:accountId/update", updateOne);
 accountR.delete("/:accountId/delete", deleteOne);

@@ -4,7 +4,7 @@ import { showAll, showOne, updateOne, deleteOne, createOne } from "../../control
 const workScheduleR = Router();
 
 workScheduleR.get("/", showAll);
-workScheduleR.get("/:workScheduleId", showOne);
+workScheduleR.get("/:workScheduleId/show", showOne);
 workScheduleR.post("/create", createOne);
 workScheduleR.put("/:workScheduleId/update", updateOne);
 workScheduleR.delete("/:workScheduleId/delete", deleteOne);

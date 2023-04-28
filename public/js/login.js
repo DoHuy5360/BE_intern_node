@@ -27,10 +27,14 @@ document.addEventListener("DOMContentLoaded", (e) => {
 				window.history.replaceState(null, "", newUrl);
 			})
 			.finally(() => {
-				const scriptTag = document.createElement("script");
-				scriptTag.type = "module";
-				scriptTag.src = "/js/admin.js";
-				document.body.appendChild(scriptTag);
+				replaceScript("/js/admin.js");
+				replaceScript("/js/sidebar.js");
 			});
 	});
+	function replaceScript(script) {
+		const scriptTag = document.createElement("script");
+		scriptTag.type = "module";
+		scriptTag.src = script;
+		document.body.appendChild(scriptTag);
+	}
 });

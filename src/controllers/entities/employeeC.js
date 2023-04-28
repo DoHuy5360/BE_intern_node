@@ -3,6 +3,7 @@ import { getTimeZ } from "../../script/timeProvider.js";
 import { uuidPrefix } from "../../script/IdProvider.js";
 import CRUDTemplate from "../../database/curdTemplate.js";
 import { accountCURDTemplate } from "./accountC.js";
+import pool from "../../database/connect.js";
 
 const employeeCRUDTemplate = new CRUDTemplate("employee");
 
@@ -54,9 +55,37 @@ const createOne = async (req, res) => {
 		update_at: getTimeZ(),
 	});
 
-	res.json();
+	res.send("Success");
 };
-const method3 = (req, res) => {};
+const readAllInfo = (req, res) => {
+	pool.query(
+		`
+		SELECT employee_id, headquarter_address,
+		e.account_id, e.headquarter_id, 
+		employee_avatar, employee_name, 
+		employee_phone, employee_address, 
+		employee_gender, employee_position, 
+		employee_salary, account_email, 
+		account_role, headquarter_name  
+		FROM employee e, account a , headquarter h 
+		WHERE e.account_id = a.account_id 
+		AND e.headquarter_id = h.headquarter_id
+		LIMIT 30
+	`,
+		(err, records) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+
+			res.json({
+				status: 200,
+				numbers: records.rows.length,
+				records: records.rows,
+			});
+		}
+	);
+};
 const method4 = (req, res) => {};
 
-export { showAll, showOne, updateOne, deleteOne, createOne };
+export { showAll, showOne, updateOne, deleteOne, createOne, readAllInfo };

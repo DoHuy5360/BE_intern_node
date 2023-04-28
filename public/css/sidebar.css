@@ -1,0 +1,8 @@
+#wrap-navidgate {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+.navigate_link {
+	cursor: pointer;
+}

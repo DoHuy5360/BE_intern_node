@@ -1,0 +1,75 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#wrap-employee-table {
+	padding: 0 20px;
+}
+#title-bar {
+	background-color: #eaeaea;
+}
+.bar_format {
+	display: grid;
+	grid-template-columns: 100px repeat(3, 300px);
+	gap: 10px;
+	align-items: center;
+}
+.wrap_employee_bar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+}
+#list-employee .wrap_employee_bar:hover {
+	background-color: #eaeaea;
+	cursor: pointer;
+}
+.bar_format div {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	text-align: center;
+}
+.option-title,
+.wrap_option_btn {
+	width: 200px;
+	text-align: center;
+}
+#list-employee .bar_format div:last-child {
+	align-items: flex-end;
+}
+#list-employee {
+	display: flex;
+	flex-direction: column;
+	gap: 5px;
+	justify-content: center;
+	border-width: 0 1px;
+	border-color: #eaeaea;
+	border-style: solid;
+}
+.wrap_option_btn {
+	display: flex;
+	gap: 10px;
+	align-items: center;
+}
+.option_btn {
+	all: unset;
+	padding: 10px;
+	border-radius: 2px;
+	font-size: 0.7rem;
+	width: 40px;
+	cursor: pointer;
+	user-select: none;
+}
+
+.delete_btn {
+	background-color: #ff5858;
+}
+.edit_btn {
+	background-color: #eeee00;
+}
+.view_btn {
+	background-color: #1be206;
+}
