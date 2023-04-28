@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			});
 		await fetch("/admin", {
 			headers: {
-				Authorization: `Bearer ${token}`,
+				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},
 		})
 			.then((res) => res.text())

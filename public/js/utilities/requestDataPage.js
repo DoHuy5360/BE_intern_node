@@ -11,10 +11,12 @@ function getListUser() {
 	})
 		.then((res) => res.json())
 		.then((data) => {
+			const barLoading = document.querySelector("#employee-bar-loading");
 			const { status, numbers, records } = data;
 			if (status === 200) {
-				records.forEach((rec) => {
-					listEmployee.insertAdjacentHTML("beforeend", createEmplyeeInfoBar.call(rec));
+				records.forEach((rec, idx) => {
+					listEmployee.insertAdjacentHTML("beforeend", createEmplyeeInfoBar.call({ idx, ...rec }));
+					barLoading.style.transform = `translateY(${idx * 60}px)`;
 				});
 			}
 		})
@@ -25,6 +27,7 @@ function getListUser() {
 		return `
     <div class="wrap_employee_bar">
         <div class="bar_format">
+            <div>${this.idx + 1}</div>
             <div>${this.account_id}</div>
             <div>${this.employee_name}</div>
             <div>${this.employee_position}</div>

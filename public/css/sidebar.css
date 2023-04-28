@@ -1,3 +1,7 @@
+#wrap-full-sidebar {
+	background-color: var(--sub-cl);
+	padding: 10px;
+}
 #wrap-navidgate {
 	display: flex;
 	flex-direction: column;
