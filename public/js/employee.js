@@ -1,2 +1,2 @@
-import { requestListEmployee } from "./utilities/requestListEmployee.js";
-requestListEmployee();
+import { getListUser } from "./utilities/requestDataPage.js";
+getListUser();
