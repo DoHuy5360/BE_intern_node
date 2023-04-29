@@ -1,2 +1,3 @@
-import { getListUser } from "./utilities/requestDataPage.js";
+import { getListUser } from "./utilities/postDataPage/postEmployee.js";
+
 getListUser();

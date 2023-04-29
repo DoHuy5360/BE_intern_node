@@ -13,6 +13,10 @@ const admin = (req, res) => {
 const postDashboard = (req, res) => {
 	res.render("dashboard", { title: "Dashboard", layout: false });
 };
+const postEmployee = (req, res) => {
+	res.render("employee", { title: "View employees", layout: false });
+};
+
 const getDashboard = (req, res) => {
 	res.render("dashboard", { title: "Dashboard", layout: "main" });
 };
@@ -20,8 +24,4 @@ const getEmployee = (req, res) => {
 	res.render("employee", { title: "Employee", layout: "main" });
 };
 
-const employee = (req, res) => {
-	res.render("employee", { title: "View employees", layout: false });
-};
-
-export { login, loginPost, admin, getDashboard, postDashboard, employee, getEmployee };
+export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee };

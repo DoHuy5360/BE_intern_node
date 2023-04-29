@@ -1,4 +1,4 @@
-import { getDashboardData } from "./utilities/requestDataPage.js";
+import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
 
 getDashboardData();
 

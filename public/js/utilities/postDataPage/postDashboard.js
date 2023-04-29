@@ -1,47 +1,5 @@
-import { horizontalBarChart } from "./chart.js";
+import { horizontalBarChart } from "../chart.js";
 
-function getListUser() {
-	const token = localStorage.getItem("token");
-	const listEmployee = document.querySelector("#list-employee");
-	fetch("/api/v2/employee/all-information", {
-		headers: {
-			Authorization: `Bearer ${token}`,
-			"Content-Type": "application/json",
-		},
-	})
-		.then((res) => res.json())
-		.then((data) => {
-			const barLoading = document.querySelector("#employee-bar-loading");
-			const { status, numbers, records } = data;
-			if (status === 200) {
-				records.forEach((rec, idx) => {
-					listEmployee.insertAdjacentHTML("beforeend", createEmplyeeInfoBar.call({ idx, ...rec }));
-					barLoading.style.transform = `translateY(${idx * 60}px)`;
-				});
-			}
-		})
-		.finally(() => {
-			window.history.replaceState(null, "", "/employee");
-		});
-	function createEmplyeeInfoBar() {
-		return `
-    <div class="wrap_employee_bar">
-        <div class="bar_format">
-            <div>${this.idx + 1}</div>
-            <div>${this.account_id}</div>
-            <div>${this.employee_name}</div>
-            <div>${this.employee_position}</div>
-            <div>${this.account_role}</div>
-        </div>
-        <div class="wrap_option_btn">
-            <div class="delete_btn option_btn">Delete</div>
-            <div class="edit_btn option_btn">Edit</div>
-            <div class="view_btn option_btn">View</div>
-        </div>
-    </div>
-    `;
-	}
-}
 function getDashboardData() {
 	const bodyContent = document.querySelector("#content-body");
 	const token = localStorage.getItem("token");
@@ -52,12 +10,11 @@ function getDashboardData() {
 		},
 	})
 		.then((res) => res.text())
-		.then((data) => {
-			bodyContent.innerHTML = data;
+		.then((html) => {
+			bodyContent.innerHTML = html;
 			window.history.replaceState(null, "", "/dashboard");
 		})
 		.finally(() => {
-			replaceScript("/js/admin.js");
 			replaceScript("/js/sidebar.js");
 		});
 	function replaceScript(script) {
@@ -65,6 +22,8 @@ function getDashboardData() {
 		scriptTag.type = "module";
 		scriptTag.src = script;
 		document.body.appendChild(scriptTag);
+		const exitsScript = document.querySelector(`script[src="${script}"`);
+		exitsScript.remove();
 	}
 	function fetchData(url, callback) {
 		fetch(url, {
@@ -96,4 +55,4 @@ function getDashboardData() {
 		barChart.setLabel("Number of Employees");
 	});
 }
-export { getListUser, getDashboardData };
+export { getDashboardData };

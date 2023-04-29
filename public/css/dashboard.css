@@ -6,10 +6,17 @@
 	flex-wrap: wrap;
 	gap: 10px;
 }
-#wrap-charts canvas {
+.wrap_columns {
+	display: flex;
+}
+.wrap_columns {
+	width: calc(100% / 3 - 10px);
+}
+canvas {
 	box-shadow: 0 3px 24px #00000014;
 	-webkit-box-shadow: 0 3px 24px #00000014;
 	-moz-box-shadow: 0 3px 24px #00000014;
 	border-radius: 4px;
 	height: fit-content;
+	width: 100%;
 }

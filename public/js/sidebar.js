@@ -1,6 +1,6 @@
-import { getDashboardData, getListUser } from "./utilities/requestDataPage.js";
+import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
+import { getListUser } from "./utilities/postDataPage/postEmployee.js";
 
-const bodyContent = document.querySelector("#content-body");
 const navigateLinks = document.querySelectorAll(".navigate_link");
 navigateLinks.forEach((link) => {
 	link.addEventListener("click", async (e) => {
@@ -10,12 +10,7 @@ navigateLinks.forEach((link) => {
 				getDashboardData();
 				break;
 			case "employee":
-				fetch("/list/employee", {})
-					.then((res) => res.text())
-					.then((data) => {
-						bodyContent.innerHTML = data;
-						getListUser();
-					});
+				getListUser();
 				break;
 		}
 	});

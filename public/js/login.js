@@ -1,4 +1,5 @@
-import { getDashboardData } from "./utilities/requestDataPage.js";
+import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
+import { setJwtToken } from "./utilities/requestToken.js";
 
 document.addEventListener("DOMContentLoaded", (e) => {
 	const htmlTag = document.querySelector("html");
@@ -7,13 +8,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	const inpPassword = document.getElementById("password");
 	loginForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
-		await fetch("/api/v2/login", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: inpEmail.value, password: inpPassword.value }) })
-			.then((res) => res.json())
-			.then((data) => {
-				localStorage.setItem("token", data.token);
-				const second = 1800;
-				document.cookie = `token=${data.token}; max-age=${second}; path=/; secure; SameSite=strict`;
-			});
+		await setJwtToken("/api/v2/login", { email: inpEmail.value, password: inpPassword.value });
 		await fetch("/admin", {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -22,6 +17,9 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			.then((res) => res.text())
 			.then((html) => {
 				htmlTag.innerHTML = html;
+			})
+			.catch((e) => {
+				console.warn(e);
 			})
 			.finally(() => {
 				getDashboardData();

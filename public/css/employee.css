@@ -35,6 +35,7 @@
 	height: 100%;
 	background-color: white;
 	transition: 1000ms linear;
+	z-index: 2;
 }
 .bar_format div {
 	overflow: hidden;
