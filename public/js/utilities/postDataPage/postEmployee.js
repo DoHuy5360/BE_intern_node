@@ -1,12 +1,4 @@
 async function getListUser() {
-	const bodyContent = document.querySelector("#content-body");
-	await fetch("/employee", {
-		method: "POST",
-	})
-		.then((res) => res.text())
-		.then((data) => {
-			bodyContent.innerHTML = data;
-		});
 	const token = localStorage.getItem("token");
 	const listEmployee = document.querySelector("#list-employee");
 	await fetch("/api/v2/employee/all-information", {

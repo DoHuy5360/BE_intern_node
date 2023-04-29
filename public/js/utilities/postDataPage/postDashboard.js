@@ -1,30 +1,6 @@
 import { horizontalBarChart } from "../chart.js";
 
 function getDashboardData() {
-	const bodyContent = document.querySelector("#content-body");
-	const token = localStorage.getItem("token");
-	fetch("/dashboard", {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${token}`,
-		},
-	})
-		.then((res) => res.text())
-		.then((html) => {
-			bodyContent.innerHTML = html;
-			window.history.replaceState(null, "", "/dashboard");
-		})
-		.finally(() => {
-			replaceScript("/js/sidebar.js");
-		});
-	function replaceScript(script) {
-		const scriptTag = document.createElement("script");
-		scriptTag.type = "module";
-		scriptTag.src = script;
-		document.body.appendChild(scriptTag);
-		const exitsScript = document.querySelector(`script[src="${script}"`);
-		exitsScript.remove();
-	}
 	function fetchData(url, callback) {
 		fetch(url, {
 			headers: {
