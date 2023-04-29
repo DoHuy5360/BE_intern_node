@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	loginForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		await setJwtToken("/api/v2/login", { email: inpEmail.value, password: inpPassword.value });
-		await fetch("/admin", {
+		await fetch("/dashboard", {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},
@@ -23,6 +23,15 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			})
 			.finally(() => {
 				getDashboardData();
+				replaceScript("/js/sidebar.js");
 			});
 	});
 });
+function replaceScript(script) {
+	const scriptTag = document.createElement("script");
+	scriptTag.type = "module";
+	scriptTag.src = script;
+	document.body.appendChild(scriptTag);
+	const exitsScript = document.querySelector(`script[src="${script}"`);
+	exitsScript.remove();
+}

@@ -15,7 +15,7 @@
 }
 .bar_format {
 	display: grid;
-	grid-template-columns: 50px 100px repeat(3, 300px);
+	grid-template-columns: 50px 100px repeat(4, 200px);
 	gap: 10px;
 	align-items: center;
 }
@@ -41,7 +41,7 @@
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	text-align: center;
+	text-align: left;
 }
 .option-title,
 .wrap_option_btn {
