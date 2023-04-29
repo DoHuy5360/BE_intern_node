@@ -21,7 +21,7 @@ async function getListUser() {
 		.finally(() => {
 			window.history.replaceState(null, "", "/employee");
 			setEventClick(".delete_btn", async (btn) => {
-				const isDelete = await popUp(`Delete This Account?<br><br>${btn.getAttribute("data-email")}`);
+				const isDelete = await popUp(`Delete This Account?<br>${btn.getAttribute("data-email")}`);
 				if (isDelete) {
 					requestAction(`/api/v2/account/${btn.getAttribute("data-id")}/delete`, "DELETE");
 				}
@@ -51,15 +51,19 @@ function requestAction(url, method) {
 async function popUp(message) {
 	document.body.insertAdjacentHTML(
 		"beforeend",
-		`<div id="wrap-popup">
-			<div>${message}</div>
-			<div id="wrap-poup-options">
-				<button id="popup-yes-btn" class="popup_btn" type="button">Yes</button>
-				<button id="popup-no-btn" class="popup_btn" type="button">No</button>
+		`
+		<div id="popup-bg">
+			<div id="wrap-popup">
+				<div>${message}</div>
+				<div id="wrap-poup-options">
+					<button id="popup-yes-btn" class="popup_btn" type="button">Yes</button>
+					<button id="popup-no-btn" class="popup_btn" type="button">No</button>
+				</div>
 			</div>
-		</div>`
+		</div>
+		`
 	);
-	const popupForm = document.querySelector("#wrap-popup");
+	const popupForm = document.querySelector("#popup-bg");
 	const isDelete = await new Promise((resolve, reject) => {
 		document.querySelector("#popup-yes-btn").addEventListener("click", (e) => {
 			resolve(true);

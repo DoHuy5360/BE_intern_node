@@ -10,6 +10,7 @@ function getDashboardData() {
 			.then((res) => res.json())
 			.then((data) => {
 				callback(data);
+				window.history.replaceState(null, "", "/dashboard");
 			});
 	}
 	fetchData("/api/v2/index/table/records", (data) => {

@@ -24,6 +24,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 			.finally(() => {
 				getDashboardData();
 				replaceScript("/js/sidebar.js");
+				replaceScript("https://kit.fontawesome.com/22e1005e84.js");
 			});
 	});
 });
