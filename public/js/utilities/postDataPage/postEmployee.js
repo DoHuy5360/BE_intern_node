@@ -21,31 +21,81 @@ async function getListUser() {
 		.finally(() => {
 			window.history.replaceState(null, "", "/employee");
 			setEventClick(".delete_btn", async (btn) => {
-				const isDelete = await popUp(`Delete This Account?<br>${btn.getAttribute("data-email")}`);
-				if (isDelete) {
-					requestAction(`/api/v2/account/${btn.getAttribute("data-id")}/delete`, "DELETE");
+				const isAccept = await popUp(`Delete This Account?<br>${btn.getAttribute("data-email")}`);
+				if (isAccept) {
+					const isDeleted = requestAction(`/api/v2/account/${btn.getAttribute("data-id")}/delete`, "DELETE");
+					if (isDeleted) {
+						document.querySelector(`[data-bar="${btn.getAttribute("data-id")}"]`).remove();
+					}
 				}
 			});
 			setEventClick(".edit_btn", () => {
-				console.log(2);
+				console.log("Not set");
 			});
 			setEventClick(".view_btn", () => {
-				console.log(3);
+				console.log("Not set");
+			});
+			const arrayWrapars = document.querySelectorAll("#list-employee .wrap_employee_bar");
+			const arrayBars = document.querySelectorAll(".info-bar");
+			const filterInputs = document.querySelectorAll(".filter_input");
+			filterInputs.forEach((inp) => {
+				let delayFilter;
+				inp.addEventListener("input", (e) => {
+					if (delayFilter !== undefined) {
+						clearTimeout(delayFilter);
+					}
+					delayFilter = setTimeout(() => {
+						listEmployee.innerHTML = "";
+						const filterTray = handleFilter(e.target.value.trim(), inp.name, arrayBars, arrayWrapars);
+						filterTray.forEach((bar) => {
+							listEmployee.appendChild(bar);
+						});
+					}, 500);
+				});
+			});
+			const resetFilterBtn = document.querySelector("#reset-filter-btn");
+			resetFilterBtn.addEventListener("click", (e) => {
+				listEmployee.innerHTML = "";
+				arrayWrapars.forEach((bar) => {
+					listEmployee.appendChild(bar);
+				});
 			});
 		});
 }
 
-function requestAction(url, method) {
-	fetch(url, {
+let filterObject = {};
+function handleFilter(inputValue, type, arrayBars, arrayWrapars) {
+	const filterTray = [];
+	filterObject[type] = inputValue;
+	arrayBars.forEach((bar) => {
+		const arrayConditions = [];
+		for (const key in filterObject) {
+			const value = filterObject[key];
+			if (value.length !== 0) {
+				const regex = new RegExp(value);
+				if (regex.test(bar.querySelector(`[data-name="${key}"]`).innerText.toLowerCase())) {
+					arrayConditions.push(true);
+				} else {
+					arrayConditions.push(false);
+				}
+			}
+		}
+		if (arrayConditions.every((condition) => condition === true)) {
+			filterTray.push(bar.parentNode);
+		}
+	});
+	return filterTray.length === 0 ? arrayWrapars : filterTray;
+}
+
+async function requestAction(url, method) {
+	return await fetch(url, {
 		method,
 		headers: {
 			Authorization: `Bearer ${localStorage.getItem("token")}`,
 		},
 	})
 		.then((res) => res.json())
-		.then((mes) => {
-			console.log(mes);
-		});
+		.then((mes) => (mes.deleted === 1 ? true : false));
 }
 
 async function popUp(message) {
@@ -54,7 +104,7 @@ async function popUp(message) {
 		`
 		<div id="popup-bg">
 			<div id="wrap-popup">
-				<div>${message}</div>
+				<div id="popup-message">${message}</div>
 				<div id="wrap-poup-options">
 					<button id="popup-yes-btn" class="popup_btn" type="button">Yes</button>
 					<button id="popup-no-btn" class="popup_btn" type="button">No</button>
@@ -84,14 +134,14 @@ function setEventClick(className, callback) {
 }
 function createEmplyeeInfoBar() {
 	return `
-    <div class="wrap_employee_bar">
-        <div class="bar_format">
+    <div class="wrap_employee_bar" data-bar="${this.account_id}">
+        <div class="bar_format info-bar">
             <div>${this.idx + 1}</div>
-            <div>${this.account_id}</div>
-            <div>${this.employee_name}</div>
-            <div>${this.account_email}</div>
-            <div>${this.employee_position}</div>
-            <div>${this.account_role}</div>
+            <div data-name="id">${this.account_id}</div>
+            <div data-name="name">${this.employee_name}</div>
+            <div data-name="email">${this.account_email}</div>
+            <div data-name="position">${this.employee_position}</div>
+            <div data-name="role">${this.account_role}</div>
         </div>
         <div class="wrap_option_btn">
             <div class="delete_btn option_btn" data-id="${this.account_id}" data-email="${this.account_email}">Delete</div>

@@ -1,6 +1,10 @@
 #wrap-employee-table {
 	padding: 0 20px;
+	position: relative;
+	height: 100%;
+	overflow-y: scroll;
 }
+
 #title-bar {
 	background-color: var(--sub-cl);
 	position: sticky;
@@ -56,11 +60,11 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	border-width: 0 1px;
-	border-color: var(--sub-cl);
-	border-style: solid;
+	border: 1px solid var(--sub-cl);
+	border-top-color: var(--main-cl);
 	position: relative;
 	overflow: hidden;
+	padding-bottom: 30px;
 }
 .wrap_option_btn {
 	display: flex;
@@ -76,15 +80,55 @@
 	cursor: pointer;
 	user-select: none;
 }
+.option_btn:hover {
+	background-color: var(--main-cl);
+}
 
 .delete_btn {
-	background-color: #f8baba;
+	background-color: var(--pale-red-cl);
 }
 .edit_btn {
-	background-color: #eeee00;
+	background-color: var(--pale-yel-cl);
 }
 .view_btn {
-	background-color: #a8eda1;
+	background-color: var(--pale-gre-cl);
+}
+#wrap-fillers-kit {
+	position: fixed;
+	z-index: 4;
+	bottom: 0;
+	width: 100%;
+	padding: 5px 0;
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	background-color: var(--main-cl);
+	border-top: 1px solid var(--sub-cl);
+	user-select: none;
+}
+#reset-filter-btn {
+	all: unset;
+	background-color: var(--sub-cl);
+	font-size: 0.9rem;
+	padding: 0px 10px;
+	height: 25px;
+	cursor: pointer;
+	border-radius: 2px;
+}
+.wrap_filter {
+	display: flex;
+	align-items: center;
+	font-size: 0.9rem;
+	gap: 5px;
+	font-weight: 300;
+}
+.filter_input {
+	outline: unset;
+	border: 1px solid var(--sub-cl);
+	height: 25px;
+	padding: 0 5px;
+	border-radius: 2px;
+	background-color: var(--sub-cl);
 }
 @keyframes fade-loading {
 	0% {
