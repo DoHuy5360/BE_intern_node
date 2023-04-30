@@ -1,5 +1,6 @@
 import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
 import { getListUser } from "./utilities/postDataPage/postEmployee.js";
+import { requestScheduleData } from "./utilities/postDataPage/postSchedule.js";
 
 const navigateLinks = document.querySelectorAll(".navigate_link");
 const bodyContent = document.querySelector("#content-body");
@@ -25,7 +26,7 @@ navigateLinks.forEach((link) => {
 					});
 				break;
 			case "employee":
-				await fetch("/employee", {
+				fetch("/employee", {
 					method: "POST",
 				})
 					.then((res) => res.text())
@@ -34,6 +35,19 @@ navigateLinks.forEach((link) => {
 					})
 					.finally(() => {
 						getListUser();
+					});
+				break;
+
+			case "schedule":
+				fetch("/schedule", {
+					method: "POST",
+				})
+					.then((res) => res.text())
+					.then((html) => {
+						bodyContent.innerHTML = html;
+					})
+					.finally(() => {
+						requestScheduleData();
 					});
 				break;
 		}

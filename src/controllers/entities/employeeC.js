@@ -57,6 +57,26 @@ const createOne = async (req, res) => {
 
 	res.send("Success");
 };
+const getAllName = (req, res) => {
+	pool.query(
+		`
+	SELECT employee_id,employee_name
+	FROM employee
+	WHERE employee_name NOT LIKE 'null'
+	`,
+		(err, records) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+			res.json({
+				status: 200,
+				records: records.rows,
+			});
+		}
+	);
+};
+
 const readAllInfo = (req, res) => {
 	pool.query(
 		`
@@ -88,4 +108,4 @@ const readAllInfo = (req, res) => {
 };
 const method4 = (req, res) => {};
 
-export { showAll, showOne, updateOne, deleteOne, createOne, readAllInfo };
+export { showAll, showOne, updateOne, deleteOne, createOne, getAllName, readAllInfo };

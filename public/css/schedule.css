@@ -1,9 +1,9 @@
 #wrap-schedule {
-	margin: 10px;
-	width: calc(100% - 150px);
-	height: 100%;
+	margin: 10px 10px 0 10px;
+	width: calc(100% - 125px);
+	height: calc(100% - 10px);
 	overflow: scroll;
-	border: 1px solid #eeeeee;
+	border: 1px solid var(--sub-cl);
 }
 .wrap_day_title {
 	display: flex;
@@ -11,6 +11,7 @@
 	gap: 1px;
 	position: sticky;
 	top: 0;
+	background-color: var(--sub-cl);
 }
 #wrap-month-year {
 	display: flex;
@@ -20,7 +21,7 @@
 	left: 0;
 	top: 0;
 	z-index: 2;
-	background-color: #eeeeee;
+	background-color: var(--main-cl);
 }
 .wrap_hours {
 	display: flex;
@@ -30,7 +31,13 @@
 .date_title,
 .time_cell,
 .ws_cell {
-	background-color: white;
+	background-color: var(--main-cl);
+}
+.ws_info {
+	padding: 5px;
+	display: flex;
+	flex-direction: column;
+	font-size: 0.9rem;
 }
 .wrap_user_infor {
 	position: sticky;
@@ -39,6 +46,7 @@
 .time_cell {
 	text-align: center;
 	width: 50px;
+	padding: 5px 0;
 }
 .date_title {
 	text-align: center;
@@ -49,8 +57,9 @@
 .wrap_user_schedule,
 #table-header {
 	display: grid;
-	grid-template-columns: 150px repeat(7, 1fr);
+	grid-template-columns: 170px repeat(7, 1fr);
 	gap: 1px;
+	border-bottom: 1px solid var(--sub-cl);
 }
 #table-header {
 	position: sticky;
@@ -60,8 +69,7 @@
 #schedule-table {
 	display: flex;
 	flex-direction: column;
-	gap: 1px;
-	background-color: #eaeaea;
+	background-color: var(--sub-cl);
 	width: fit-content;
 	height: fit-content;
 }
@@ -73,13 +81,20 @@
 .wrap_ws {
 	display: flex;
 	flex-direction: column;
+	gap: 1px;
+	background-color: var(--sub-cl);
 }
 #wrap-year,
 #wrap-month {
 	width: 100%;
-	background-color: #eeeeee;
-	background-color: white;
+	background-color: var(--sub-cl);
 }
 .sw_cell {
-	background-color: #eeeeee;
+	background-color: var(--sub-cl);
+}
+.date_title,
+#wrap-year,
+#wrap-month,
+.wrap_user_infor {
+	padding: 5px;
 }

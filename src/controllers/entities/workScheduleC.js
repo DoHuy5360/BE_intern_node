@@ -61,7 +61,7 @@ const getAllWorkSchedule = (req, res) => {
 	FROM employee e, work_schedule w, headquarter h 
 	WHERE e.employee_id = w.employee_id 
 	AND e.headquarter_id = h.headquarter_id
-
+	AND e.employee_name NOT LIKE 'null'
 	LIMIT 10
 	`,
 		(err, records) => {
