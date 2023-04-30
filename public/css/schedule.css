@@ -2,6 +2,7 @@
 	height: 100%;
 	width: fit-content;
 	overflow-y: scroll;
+	user-select: none;
 }
 #schedule-table {
 	display: flex;
@@ -10,6 +11,11 @@
 	flex-direction: column;
 	background-color: #eaeaea;
 	border: 1px solid #eaeaea;
+}
+#wrap-month {
+	background-color: #eeeeee;
+	text-align: center;
+	padding: 5px 0;
 }
 #table-header {
 	display: flex;
@@ -34,6 +40,7 @@
 }
 .time_cell {
 	width: 100px;
+	height: 32px;
 }
 .cell_size {
 	padding: 5px 0;
@@ -47,4 +54,11 @@
 }
 .wrap_schedule_col {
 	height: 100%;
+	display: flex;
+}
+.ws_cell {
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	background-color: #eeeeee;
 }
