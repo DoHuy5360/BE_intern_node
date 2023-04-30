@@ -1,6 +1,7 @@
 import { getTimeZ } from "../../script/timeProvider.js";
 import { uuidPrefix } from "../../script/IdProvider.js";
 import CRUDTemplate from "../../database/curdTemplate.js";
+import pool from "../../database/connect.js";
 
 const workScheduleCRUDTemplate = new CRUDTemplate("work_schedule");
 
@@ -46,7 +47,35 @@ const createOne = async (req, res) => {
 		})
 	);
 };
-const method3 = (req, res) => {};
+const getAllWorkSchedule = (req, res) => {
+	pool.query(
+		`
+	SELECT e.employee_id, employee_name,
+		employee_phone, employee_avatar,
+		employee_position, work_schedule_plan,
+		work_schedule_departure,work_schedule_destination,
+		w.work_schedule_time_in, w.work_schedule_time_out,
+		work_schedule_place, work_schedule_color,
+		work_schedule_id, headquarter_name,
+		headquarter_address 
+	FROM employee e, work_schedule w, headquarter h 
+	WHERE e.employee_id = w.employee_id 
+	AND e.headquarter_id = h.headquarter_id
+
+	LIMIT 10
+	`,
+		(err, records) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+			res.json({
+				status: 200,
+				records: records.rows,
+			});
+		}
+	);
+};
 const method4 = (req, res) => {};
 
-export { showAll, showOne, updateOne, deleteOne, createOne };
+export { showAll, showOne, updateOne, deleteOne, createOne, getAllWorkSchedule };

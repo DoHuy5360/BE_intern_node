@@ -12,6 +12,7 @@
 	background-color: #eaeaea;
 	border: 1px solid #eaeaea;
 }
+#wrap-year,
 #wrap-month {
 	background-color: #eeeeee;
 	text-align: center;
@@ -61,4 +62,7 @@
 	flex-direction: column;
 	gap: 3px;
 	background-color: #eeeeee;
+	width: 20px;
+	overflow: hidden;
+	height: fit-content;
 }

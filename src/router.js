@@ -43,7 +43,7 @@ app.use("/api/v2/index", adminAuthorization, indexR);
 app.use("/api/v2/account", adminAuthorization, accountR);
 app.use("/api/v2/employee", adminAuthorization, employeeR);
 app.use("/api/v2/headquarter", adminAuthorization, headquarterR);
-app.use("/api/v2/workSchedule", adminAuthorization, workScheduleR);
+app.use("/api/v2/workSchedule", workScheduleR);
 
 const PORT = process.env.PORT || 8998;
 
