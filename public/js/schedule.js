@@ -6,16 +6,16 @@ function setLocation(wsCell, timeIn, timeOut) {
 	const timeStart = scaleTime(sumIn);
 	const timeEnd = scaleTime(sumOut) - timeStart;
 	Object.assign(wsCell.style, {
-		"margin-top": `${timeStart}px`,
-		height: `${timeEnd}px`,
+		"margin-left": `${timeStart}px`,
+		width: `${timeEnd}px`,
 	});
 }
 function scaleTime(time) {
-	//* 60 minutes = 32px + 1px
-	//* 32px: cell height
+	//* 60 minutes = 50px + 1px
+	//* 50px: cell height
 	//* 1px : gap
-	//* n minutes = ((n * 33) / 60)px
-	return (time * (32 + 1)) / 60;
+	//* n minutes = ((n * 51) / 60)px
+	return (time * 51) / 60;
 }
 
 function createWsCell() {
@@ -29,24 +29,51 @@ function createWsCell() {
         `;
 	return wrap.querySelector(".ws_cell");
 }
-fetch("/api/v2/workschedule/all-workschedule")
-	.then((res) => res.json())
-	.then((data) => {
-		console.log(data);
-		data.records.forEach((record) => {
-			const { work_schedule_time_in, work_schedule_time_out } = record;
-			const [dateIn, timeIn] = work_schedule_time_in.split("T");
-			const [dateOut, timeOut] = work_schedule_time_out.split("T");
-			const objDateIn = new Date(dateIn);
-			const dayIn = objDateIn.getDay();
-			const objDateOut = new Date(dateOut);
-			const dayOut = objDateOut.getDay();
-			const wsCell = createWsCell.call({ ...record, timeIn, timeOut });
-			const dayCol = document.querySelector(`[data-day="${dayIn}"]`);
-			setLocation(wsCell, timeIn, timeOut);
-			dayCol.appendChild(wsCell);
+function createUserCell() {
+	return `
+	<div class="wrap_user_schedule" data-id="${this.employee_id}">
+		<div class="wrap_user_infor">${this.employee_name}</div>
+		<div class="wrap_ws" data-day="1"></div>
+		<div class="wrap_ws" data-day="2"></div>
+		<div class="wrap_ws" data-day="3"></div>
+		<div class="wrap_ws" data-day="4"></div>
+		<div class="wrap_ws" data-day="5"></div>
+		<div class="wrap_ws" data-day="6"></div>
+		<div class="wrap_ws" data-day="0"></div>
+	</div>
+	`;
+}
+const tableBody = document.querySelector("#table-body");
+async function requestScheduleData() {
+	await fetch("/api/v2/employee")
+		.then((res) => res.json())
+		.then((data) => {
+			data.records.forEach((record) => {
+				tableBody.insertAdjacentHTML("beforeend", createUserCell.call(record));
+			});
 		});
-	});
+	await fetch("/api/v2/workschedule/all-workschedule")
+		.then((res) => res.json())
+		.then((data) => {
+			data.records.forEach((record) => {
+				const { work_schedule_time_in, work_schedule_time_out, employee_id } = record;
+				const [dateIn, timeIn] = work_schedule_time_in.split("T");
+				const [dateOut, timeOut] = work_schedule_time_out.split("T");
+				const objDateIn = new Date(dateIn);
+				const dayIn = objDateIn.getDay();
+				const objDateOut = new Date(dateOut);
+				const dayOut = objDateOut.getDay();
+				const wsCell = createWsCell.call({ ...record, timeIn, timeOut });
+				const userCell = document.querySelector(`[data-id="${employee_id}"]`);
+				if (userCell !== null) {
+					const dayCol = userCell.querySelector(`[data-day="${dayIn}"]`);
+					setLocation(wsCell, timeIn, timeOut);
+					dayCol.appendChild(wsCell);
+				}
+			});
+		});
+}
+requestScheduleData();
 // employee_avatar: null
 // employee_id: "NV-46225f47-f56a-4506-afb6-6aef254c8abe"
 // employee_name: "Khoaaaaa123"

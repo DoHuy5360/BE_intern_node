@@ -1,67 +1,50 @@
 <link rel="stylesheet" href="/css/schedule.css" />
 <div id="wrap-schedule">
 	<div id="schedule-table">
-		<div id="wrap-year">2023</div>
-		<div id="wrap-month">January</div>
 		<div id="table-header">
-			<div class="cell_size time_cell">#</div>
-			<div id="wrap-day">
-				<div class="cell_size date_col date_title">T2</div>
-				<div class="cell_size date_col date_title">T3</div>
-				<div class="cell_size date_col date_title">T4</div>
-				<div class="cell_size date_col date_title">T5</div>
-				<div class="cell_size date_col date_title">T6</div>
-				<div class="cell_size date_col date_title">T7</div>
-				<div class="cell_size date_col date_title">CN</div>
+			<div id="wrap-month-year">
+				<div id="wrap-year">2023</div>
+				<div id="wrap-month">January</div>
 			</div>
+				<div class="wrap_day_title">
+					<div class="date_title">T2</div>
+					{{> scheduleHours}}
+				</div>
+				<div class="wrap_day_title">
+					<div class="date_title">T3</div>
+					{{> scheduleHours}}
+				</div>
+				<div class="wrap_day_title">
+					<div class="date_title">T4</div>
+					{{> scheduleHours}}
+				</div>
+				<div class="wrap_day_title">
+					<div class="date_title">T5</div>
+					{{> scheduleHours}}
+				</div>
+				<div class="wrap_day_title">
+					<div class="date_title">T6</div>
+					{{> scheduleHours}}
+				</div>
+				<div class="wrap_day_title">
+					<div class="date_title">T7</div>
+					{{> scheduleHours}}
+				</div>
+				<div class="wrap_day_title">
+					<div class="date_title">CN</div>
+					{{> scheduleHours}}
+				</div>
 		</div>
 		<div id="table-body">
-			<div id="wrap-hours">
-				<div class="cell_size time_cell">01:00</div>
-				<div class="cell_size time_cell">02:00</div>
-				<div class="cell_size time_cell">03:00</div>
-				<div class="cell_size time_cell">04:00</div>
-				<div class="cell_size time_cell">05:00</div>
-				<div class="cell_size time_cell">06:00</div>
-				<div class="cell_size time_cell">07:00</div>
-				<div class="cell_size time_cell">08:00</div>
-				<div class="cell_size time_cell">09:00</div>
-				<div class="cell_size time_cell">10:00</div>
-				<div class="cell_size time_cell">11:00</div>
-				<div class="cell_size time_cell">12:00</div>
-				<div class="cell_size time_cell">13:00</div>
-				<div class="cell_size time_cell">14:00</div>
-				<div class="cell_size time_cell">15:00</div>
-				<div class="cell_size time_cell">16:00</div>
-				<div class="cell_size time_cell">17:00</div>
-				<div class="cell_size time_cell">18:00</div>
-				<div class="cell_size time_cell">19:00</div>
-				<div class="cell_size time_cell">20:00</div>
-				<div class="cell_size time_cell">21:00</div>
-				<div class="cell_size time_cell">22:00</div>
-				<div class="cell_size time_cell">23:00</div>
-				<div class="cell_size time_cell">24:00</div>
-			</div>
-			<div id="wrap-schedule-cell">
-				<div class="date_col wrap_schedule_col" data-day="1">
-				</div>
-				<div class="date_col wrap_schedule_col" data-day="2">
-					<div class="ws_cell">
-						<div>Business Trip</div>
-						<div>Do Huy</div>
-						<div>01:30 - 05:00</div>
-					</div>
-				</div>
-				<div class="date_col wrap_schedule_col" data-day="3">
-				</div>
-				<div class="date_col wrap_schedule_col" data-day="4">
-				</div>
-				<div class="date_col wrap_schedule_col" data-day="5">
-				</div>
-				<div class="date_col wrap_schedule_col" data-day="6">
-				</div>
-				<div class="date_col wrap_schedule_col" data-day="0">
-				</div>
+			<div class="wrap_user_schedule">
+				<div class="wrap_user_infor">Do Huy</div>
+				<div class="wrap_ws" data-day="1"></div>
+				<div class="wrap_ws" data-day="2"></div>
+				<div class="wrap_ws" data-day="3"></div>
+				<div class="wrap_ws" data-day="4"></div>
+				<div class="wrap_ws" data-day="5"></div>
+				<div class="wrap_ws" data-day="6"></div>
+				<div class="wrap_ws" data-day="0"></div>
 			</div>
 		</div>
 	</div>

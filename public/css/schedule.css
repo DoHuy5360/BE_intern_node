@@ -1,68 +1,85 @@
 #wrap-schedule {
+	margin: 10px;
+	width: calc(100% - 150px);
 	height: 100%;
-	width: fit-content;
-	overflow-y: scroll;
-	user-select: none;
+	overflow: scroll;
+	border: 1px solid #eeeeee;
+}
+.wrap_day_title {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	position: sticky;
+	top: 0;
+}
+#wrap-month-year {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	position: sticky;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	background-color: #eeeeee;
+}
+.wrap_hours {
+	display: flex;
+	gap: 1px;
+}
+.wrap_user_infor,
+.date_title,
+.time_cell,
+.ws_cell {
+	background-color: white;
+}
+.wrap_user_infor {
+	position: sticky;
+	left: 0;
+}
+.time_cell {
+	text-align: center;
+	width: 50px;
+}
+.date_title {
+	text-align: center;
+}
+.first_y_cell {
+	width: 200px;
+}
+.wrap_user_schedule,
+#table-header {
+	display: grid;
+	grid-template-columns: 150px repeat(7, 1fr);
+	gap: 1px;
+}
+#table-header {
+	position: sticky;
+	top: 0;
+	z-index: 3;
 }
 #schedule-table {
 	display: flex;
-	gap: 1px;
-	margin: 10px;
 	flex-direction: column;
+	gap: 1px;
 	background-color: #eaeaea;
-	border: 1px solid #eaeaea;
-}
-#wrap-year,
-#wrap-month {
-	background-color: #eeeeee;
-	text-align: center;
-	padding: 5px 0;
-}
-#table-header {
-	display: flex;
-	gap: 1px;
-}
-#wrap-day {
-	display: flex;
-	gap: 1px;
+	width: fit-content;
+	height: fit-content;
 }
 #table-body {
 	display: flex;
 	gap: 1px;
+	flex-direction: column;
 }
-#wrap-hours {
+.wrap_ws {
 	display: flex;
 	flex-direction: column;
-	gap: 1px;
 }
-#wrap-schedule-cell {
-	display: flex;
-	gap: 1px;
-}
-.time_cell {
-	width: 100px;
-	height: 32px;
-}
-.cell_size {
-	padding: 5px 0;
-	text-align: center;
-	background-color: white;
-}
-.date_col {
-	width: 180px;
-	gap: 1px;
-	background-color: white;
-}
-.wrap_schedule_col {
-	height: 100%;
-	display: flex;
-}
-.ws_cell {
-	display: flex;
-	flex-direction: column;
-	gap: 3px;
+#wrap-year,
+#wrap-month {
+	width: 100%;
 	background-color: #eeeeee;
-	width: 20px;
-	overflow: hidden;
-	height: fit-content;
+	background-color: white;
+}
+.sw_cell {
+	background-color: #eeeeee;
 }
