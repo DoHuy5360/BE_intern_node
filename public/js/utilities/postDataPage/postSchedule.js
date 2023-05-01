@@ -1,3 +1,32 @@
+const date = new Date();
+const theYear = document.querySelector("#the-year");
+theYear.innerText = date.getFullYear();
+const theMonth = document.querySelector("#the-month");
+const arrayMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let monthIndex = date.getMonth();
+theMonth.innerText = arrayMonths[monthIndex];
+
+const preYearBtn = document.querySelector("#pre-year-btn");
+preYearBtn.addEventListener("click", (e) => {
+	theYear.innerText--;
+});
+const nextYearBtn = document.querySelector("#next-year-btn");
+nextYearBtn.addEventListener("click", (e) => {
+	theYear.innerText++;
+});
+const preMonthBtn = document.querySelector("#pre-month-btn");
+preMonthBtn.addEventListener("click", (e) => {
+	if (monthIndex > 0) {
+		theMonth.innerText = arrayMonths[--monthIndex];
+	}
+});
+const nexMonthrBtn = document.querySelector("#next-month-btn");
+nexMonthrBtn.addEventListener("click", (e) => {
+	if (monthIndex < 11) {
+		theMonth.innerText = arrayMonths[++monthIndex];
+	}
+});
+
 function setLocation(wsCell, timeIn, timeOut) {
 	const [hoursIn, minutesIn] = timeIn.split(":");
 	const [hoursOut, minutesOut] = timeOut.split(":");
@@ -43,10 +72,7 @@ function createUserCell() {
 	<div class="wrap_user_schedule" data-id="${this.employee_id}">
 		<div class="wrap_user_infor">
 			<div>${this.employee_name}</div>
-			<div class="ws_wrap_time_jump">
-				<div>Start at:</div>
-				<ol class="ws_fast_jump"></ol>
-			</div>
+			<ol class="ws_fast_jump"></ol>
 		</div>
 		<div class="wrap_ws" data-day="1"></div>
 		<div class="wrap_ws" data-day="2"></div>

@@ -3,35 +3,55 @@
 	<div id="schedule-table">
 		<div id="table-header">
 			<div id="wrap-month-year">
-				<div id="wrap-year">2023</div>
-				<div id="wrap-month">January</div>
+				<div id="wrap-year">
+					<div id="the-year"></div>
+					<div id="option-year">
+						<div id="pre-year-btn" class="change_time_btn" type="button">
+							<i class="fa-solid fa-angle-left"></i>
+						</div>
+						<div id="next-year-btn" class="change_time_btn" type="button">
+							<i class="fa-solid fa-angle-right"></i>
+						</div>
+					</div>
+				</div>
+				<div id="wrap-month">
+					<div id="the-month"></div>
+					<div id="option-month">
+						<div id="pre-month-btn" class="change_time_btn" type="button">
+							<i class="fa-solid fa-angle-left"></i>
+						</div>
+						<div id="next-month-btn" class="change_time_btn" type="button">
+							<i class="fa-solid fa-angle-right"></i>
+						</div>
+					</div>
+				</div>
 			</div>
 				<div class="wrap_day_title">
-					<div class="date_title">T2</div>
+					<div class="date_title">Monday</div>
 					{{> scheduleHours}}
 				</div>
 				<div class="wrap_day_title">
-					<div class="date_title">T3</div>
+					<div class="date_title">Tuesday</div>
 					{{> scheduleHours}}
 				</div>
 				<div class="wrap_day_title">
-					<div class="date_title">T4</div>
+					<div class="date_title">Wednesday</div>
 					{{> scheduleHours}}
 				</div>
 				<div class="wrap_day_title">
-					<div class="date_title">T5</div>
+					<div class="date_title">Thursday</div>
 					{{> scheduleHours}}
 				</div>
 				<div class="wrap_day_title">
-					<div class="date_title">T6</div>
+					<div class="date_title">Friday</div>
 					{{> scheduleHours}}
 				</div>
 				<div class="wrap_day_title">
-					<div class="date_title">T7</div>
+					<div class="date_title">Saturday</div>
 					{{> scheduleHours}}
 				</div>
 				<div class="wrap_day_title">
-					<div class="date_title">CN</div>
+					<div class="date_title">Sunday</div>
 					{{> scheduleHours}}
 				</div>
 		</div>

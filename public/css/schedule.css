@@ -46,6 +46,7 @@
 	background-color: var(--pale-gre-cl);
 }
 .wrap_user_infor {
+	border-right: 1px solid var(--sub-cl);
 	position: sticky;
 	left: 0;
 }
@@ -90,10 +91,30 @@
 	gap: 1px;
 	background-color: var(--sub-cl);
 }
+#option-year,
+#option-month {
+	display: flex;
+	gap: 5px;
+}
+.change_time_btn {
+	all: unset;
+	padding: 4px 8px;
+	cursor: pointer;
+	background-color: var(--main-cl);
+	border-radius: 2px;
+	font-size: 0.8rem;
+}
+.change_time_btn:active {
+	background-color: var(--sub-cl);
+	outline: 1px solid var(--main-cl);
+}
 #wrap-year,
 #wrap-month {
 	width: 100%;
 	background-color: var(--sub-cl);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 }
 .sw_cell {
 	background-color: var(--sub-cl);
@@ -111,4 +132,7 @@
 .ws_jump_link {
 	color: var(--gray-cl);
 	text-decoration: none;
+}
+.ws_jump_link:active {
+	color: var(--pale-gre-cl);
 }
