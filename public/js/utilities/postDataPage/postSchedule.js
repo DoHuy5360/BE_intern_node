@@ -1,31 +1,61 @@
 const date = new Date();
 const theYear = document.querySelector("#the-year");
-theYear.innerText = date.getFullYear();
+const currentYear = date.getFullYear();
+theYear.innerText = currentYear;
 const theMonth = document.querySelector("#the-month");
 const arrayMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 let monthIndex = date.getMonth();
 theMonth.innerText = arrayMonths[monthIndex];
 
+let delayTimeSelect;
+
 const preYearBtn = document.querySelector("#pre-year-btn");
 preYearBtn.addEventListener("click", (e) => {
-	theYear.innerText--;
+	handleNewWs(() => {
+		theYear.innerText--;
+	});
 });
 const nextYearBtn = document.querySelector("#next-year-btn");
 nextYearBtn.addEventListener("click", (e) => {
-	theYear.innerText++;
+	handleNewWs(() => {
+		theYear.innerText++;
+	});
 });
 const preMonthBtn = document.querySelector("#pre-month-btn");
 preMonthBtn.addEventListener("click", (e) => {
 	if (monthIndex > 0) {
-		theMonth.innerText = arrayMonths[--monthIndex];
+		handleNewWs(() => {
+			theMonth.innerText = arrayMonths[--monthIndex];
+		});
 	}
 });
+
 const nexMonthrBtn = document.querySelector("#next-month-btn");
 nexMonthrBtn.addEventListener("click", (e) => {
 	if (monthIndex < 11) {
-		theMonth.innerText = arrayMonths[++monthIndex];
+		handleNewWs(() => {
+			theMonth.innerText = arrayMonths[++monthIndex];
+		});
 	}
 });
+
+let allWrapWs;
+let allWrapJump;
+function handleNewWs(callback) {
+	if (delayTimeSelect !== undefined) {
+		clearTimeout(delayTimeSelect);
+	}
+	callback();
+
+	delayTimeSelect = setTimeout(() => {
+		[...allWrapJump].concat([...allWrapWs]).forEach((wrap, idx) => {
+			wrap.innerHTML = "";
+			if (idx === allWrapWs.length - 1) {
+				requestSchedule(theYear.innerText, monthIndex + 1);
+			}
+		});
+	}, 1000);
+}
 
 function setLocation(wsCell, timeIn, timeOut) {
 	const [hoursIn, minutesIn] = timeIn.split(":");
@@ -101,7 +131,10 @@ async function requestScheduleData() {
 				tableBody.insertAdjacentHTML("beforeend", createUserCell.call(record));
 			});
 		});
-	await fetch("/api/v2/workschedule/all-workschedule")
+	await requestSchedule(currentYear, monthIndex + 1);
+}
+async function requestSchedule(year, month) {
+	await fetch(`/api/v2/workschedule/${year}/${month}/all-workschedule`)
 		.then((res) => res.json())
 		.then((data) => {
 			data.records.forEach((record) => {
@@ -122,12 +155,13 @@ async function requestScheduleData() {
 					dayCol.appendChild(wsCell);
 				}
 			});
+			allWrapWs = document.querySelectorAll(".wrap_ws");
+			allWrapJump = document.querySelectorAll(".ws_fast_jump");
 		})
 		.finally(() => {
 			window.history.replaceState(null, "", "/schedule");
 		});
 }
-
 // employee_avatar: null
 // employee_id: "NV-46225f47-f56a-4506-afb6-6aef254c8abe"
 // employee_name: "Khoaaaaa123"
