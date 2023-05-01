@@ -1,69 +1,10 @@
-const date = new Date();
-const theYear = document.querySelector("#the-year");
-const currentYear = date.getFullYear();
-theYear.innerText = currentYear;
-const theMonth = document.querySelector("#the-month");
-const arrayMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-let monthIndex = date.getMonth();
-theMonth.innerText = arrayMonths[monthIndex];
-
-let delayTimeSelect;
-
-const preYearBtn = document.querySelector("#pre-year-btn");
-preYearBtn.addEventListener("click", (e) => {
-	handleNewWs(() => {
-		theYear.innerText--;
-	});
-});
-const nextYearBtn = document.querySelector("#next-year-btn");
-nextYearBtn.addEventListener("click", (e) => {
-	handleNewWs(() => {
-		theYear.innerText++;
-	});
-});
-const preMonthBtn = document.querySelector("#pre-month-btn");
-preMonthBtn.addEventListener("click", (e) => {
-	if (monthIndex > 0) {
-		handleNewWs(() => {
-			theMonth.innerText = arrayMonths[--monthIndex];
-		});
-	}
-});
-
-const nexMonthrBtn = document.querySelector("#next-month-btn");
-nexMonthrBtn.addEventListener("click", (e) => {
-	if (monthIndex < 11) {
-		handleNewWs(() => {
-			theMonth.innerText = arrayMonths[++monthIndex];
-		});
-	}
-});
-
-let allWrapWs;
-let allWrapJump;
-function handleNewWs(callback) {
-	if (delayTimeSelect !== undefined) {
-		clearTimeout(delayTimeSelect);
-	}
-	callback();
-
-	delayTimeSelect = setTimeout(() => {
-		[...allWrapJump].concat([...allWrapWs]).forEach((wrap, idx) => {
-			wrap.innerHTML = "";
-			if (idx === allWrapWs.length - 1) {
-				requestSchedule(theYear.innerText, monthIndex + 1);
-			}
-		});
-	}, 1000);
-}
+import { addClick } from "../actions.js";
 
 function setLocation(wsCell, timeIn, timeOut) {
-	const [hoursIn, minutesIn] = timeIn.split(":");
-	const [hoursOut, minutesOut] = timeOut.split(":");
-	const sumIn = parseInt(hoursIn) * 60 + parseInt(minutesIn);
-	const sumOut = parseInt(hoursOut) * 60 + parseInt(minutesOut);
-	const timeStart = scaleTime(sumIn);
-	const timeEnd = scaleTime(sumOut) - timeStart;
+	const sumIn = timeIn.hours * 60 + timeIn.minutes;
+	const sumOut = timeOut.hours * 60 + timeOut.minutes;
+	const timeStart = scaleTimeLine(sumIn);
+	const timeEnd = scaleTimeLine(sumOut) - timeStart;
 	const timeLine = wsCell.querySelector(".time_line");
 	Object.assign(timeLine.style, {
 		width: `${timeEnd}px`,
@@ -75,7 +16,7 @@ function setLocation(wsCell, timeIn, timeOut) {
 		width: "fit-content",
 	});
 }
-function scaleTime(time) {
+function scaleTimeLine(time) {
 	//* 60 minutes = 50px + 1px
 	//* 50px: cell height
 	//* 1px : gap
@@ -91,7 +32,7 @@ function createWsCell() {
 				<div class="ws_info">
 					<div>${this.work_schedule_place}</div>
 					<div>${this.employee_name}</div>
-					<div>${this.timeIn} - ${this.timeOut}</div>
+					<div>${this.objectTimeIn.both} - ${this.objectTimeOut.both}</div>
 				</div>
             </div>
         `;
@@ -115,14 +56,26 @@ function createUserCell() {
 	`;
 }
 function createFastJump() {
-	const [hoursIn, minutesIn] = this.timeIn.split(":");
 	return `
 		<li>
-			<a href="#${this.work_schedule_id}" class="ws_jump_link">${hoursIn + ":" + minutesIn}</a>
+			<a href="#${this.work_schedule_id}" class="ws_jump_link">${this.objectTimeIn.both}-${this.objectTimeOut.both}</a>
 		</li>
 	`;
 }
+let allWrapWs;
+let allWrapJump;
+let delayTimeSelect;
 async function requestScheduleData() {
+	const theYear = document.querySelector("#the-year");
+	const theMonth = document.querySelector("#the-month");
+	const arrayMonths = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+	const date = new Date();
+	const currentYear = date.getFullYear();
+	theYear.innerText = currentYear;
+	let monthIndex = date.getMonth();
+	theMonth.innerText = arrayMonths[monthIndex];
+	const currentMonth = monthIndex + 1;
 	const tableBody = document.querySelector("#table-body");
 	await fetch("/api/v2/employee/all-name")
 		.then((res) => res.json())
@@ -130,8 +83,59 @@ async function requestScheduleData() {
 			data.records.forEach((record) => {
 				tableBody.insertAdjacentHTML("beforeend", createUserCell.call(record));
 			});
+		})
+		.finally(() => {
+			addClick("#pre-year-btn", () => {
+				handleUpdateNewWs(() => {
+					theYear.innerText--;
+				});
+			});
+			addClick("#next-year-btn", () => {
+				handleUpdateNewWs(() => {
+					theYear.innerText++;
+				});
+			});
+
+			addClick("#pre-month-btn", () => {
+				if (monthIndex > 0) {
+					handleUpdateNewWs(() => {
+						theMonth.innerText = arrayMonths[--monthIndex];
+					});
+				}
+			});
+			addClick("#next-month-btn", () => {
+				if (monthIndex < 11) {
+					handleUpdateNewWs(() => {
+						theMonth.innerText = arrayMonths[++monthIndex];
+					});
+				}
+			});
+
+			function handleUpdateNewWs(callback) {
+				if (delayTimeSelect !== undefined) {
+					clearTimeout(delayTimeSelect);
+				}
+				callback();
+
+				delayTimeSelect = setTimeout(() => {
+					const merge = [...allWrapJump].concat([...allWrapWs]);
+					merge.forEach((wrap, idx) => {
+						wrap.innerHTML = "";
+						if (idx === merge.length - 1) {
+							requestSchedule(theYear.innerText, currentMonth);
+						}
+					});
+				}, 1000);
+			}
 		});
-	await requestSchedule(currentYear, monthIndex + 1);
+	await requestSchedule(currentYear, currentMonth);
+}
+function createObjectTime(hours, minutes) {
+	return {
+		hours: parseInt(hours),
+		minutes: parseInt(minutes),
+		both: `${hours}:${minutes}`,
+	};
 }
 async function requestSchedule(year, month) {
 	await fetch(`/api/v2/workschedule/${year}/${month}/all-workschedule`)
@@ -141,17 +145,21 @@ async function requestSchedule(year, month) {
 				const { work_schedule_time_in, work_schedule_time_out, employee_id, work_schedule_id } = record;
 				const [dateIn, timeIn] = work_schedule_time_in.split("T");
 				const [dateOut, timeOut] = work_schedule_time_out.split("T");
+				const [hoursIn, minutesIn] = timeIn.split(":");
+				const [hoursOut, minutesOut] = timeOut.split(":");
+				const objectTimeIn = createObjectTime(hoursIn, minutesIn);
+				const objectTimeOut = createObjectTime(hoursOut, minutesOut);
 				const objDateIn = new Date(dateIn);
 				const dayIn = objDateIn.getDay();
-				const objDateOut = new Date(dateOut);
-				const dayOut = objDateOut.getDay();
-				const wsCell = createWsCell.call({ ...record, timeIn, timeOut });
+				// const objDateOut = new Date(dateOut);
+				// const dayOut = objDateOut.getDay();
+				const wsCell = createWsCell.call({ ...record, objectTimeIn, objectTimeOut });
 				const userCell = document.querySelector(`[data-id="${employee_id}"]`);
 				if (userCell !== null) {
 					const wsFastJump = userCell.querySelector(".ws_fast_jump");
-					wsFastJump.insertAdjacentHTML("beforeend", createFastJump.call({ work_schedule_id, timeIn }));
+					wsFastJump.insertAdjacentHTML("beforeend", createFastJump.call({ work_schedule_id, objectTimeIn, objectTimeOut }));
 					const dayCol = userCell.querySelector(`[data-day="${dayIn}"]`);
-					setLocation(wsCell, timeIn, timeOut);
+					setLocation(wsCell, objectTimeIn, objectTimeOut);
 					dayCol.appendChild(wsCell);
 				}
 			});

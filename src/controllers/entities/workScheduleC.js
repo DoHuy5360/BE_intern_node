@@ -96,7 +96,6 @@ const getAllWorkScheduleByTimeProvided = (req, res) => {
 	AND e.employee_name NOT LIKE 'null'
 	AND EXTRACT(MONTH FROM work_schedule_time_in::TIMESTAMP) = '${month}'
     AND EXTRACT(YEAR FROM work_schedule_time_in::TIMESTAMP) = '${year}'
-	LIMIT 10
 	`,
 		(err, records) => {
 			if (err) {
