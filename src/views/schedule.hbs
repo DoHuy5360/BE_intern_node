@@ -57,7 +57,11 @@
 		</div>
 		<div id="table-body">
 			<div class="wrap_user_schedule">
-				<div class="wrap_user_infor">Do Huy</div>
+				<div class="wrap_user_infor">
+					<div class="cell_user_id">Example</div>
+					<div class="cell_user_name">Example</div>
+					<ol class="ws_fast_jump"></ol>
+				</div>
 				<div class="wrap_ws" data-day="1"></div>
 				<div class="wrap_ws" data-day="2"></div>
 				<div class="wrap_ws" data-day="3"></div>
@@ -68,5 +72,16 @@
 			</div>
 		</div>
 	</div>
+	<form id="wrap-filter-kit">
+		<div class="wrap_filter_type">
+			<label for="">Name</label>
+			<input class="filter_input" name="name" type="text">
+		</div>
+		<div class="wrap_filter_type">
+			<label for="">ID</label>
+			<input class="filter_input" name="id" type="text">
+		</div>
+		<button id="ws-reset-filter" type="reset">Reset</button>
+	</form>
 </div>
 <script type="module" src="/js/schedule.js"></script>

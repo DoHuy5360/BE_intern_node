@@ -40,9 +40,10 @@ function createWsCell() {
 }
 function createUserCell() {
 	return `
-	<div class="wrap_user_schedule" data-id="${this.employee_id}">
+	<div class="wrap_user_schedule" data-user-id="${this.employee_id}">
 		<div class="wrap_user_infor">
-			<div>${this.employee_name}</div>
+			<div class="cell_user_id">${this.employee_id}</div>
+			<div class="cell_user_name">${this.employee_name}</div>
 			<ol class="ws_fast_jump"></ol>
 		</div>
 		<div class="wrap_ws" data-day="1"></div>
@@ -65,6 +66,7 @@ function createFastJump() {
 let allWrapWs;
 let allWrapJump;
 let delayTimeSelect;
+let tableBody;
 async function requestScheduleData() {
 	const theYear = document.querySelector("#the-year");
 	const theMonth = document.querySelector("#the-month");
@@ -76,7 +78,7 @@ async function requestScheduleData() {
 	let monthIndex = date.getMonth();
 	theMonth.innerText = arrayMonths[monthIndex];
 	const currentMonth = monthIndex + 1;
-	const tableBody = document.querySelector("#table-body");
+	tableBody = document.querySelector("#table-body");
 	await fetch("/api/v2/employee/all-name")
 		.then((res) => res.json())
 		.then((data) => {
@@ -154,7 +156,7 @@ async function requestSchedule(year, month) {
 				// const objDateOut = new Date(dateOut);
 				// const dayOut = objDateOut.getDay();
 				const wsCell = createWsCell.call({ ...record, objectTimeIn, objectTimeOut });
-				const userCell = document.querySelector(`[data-id="${employee_id}"]`);
+				const userCell = document.querySelector(`[data-user-id="${employee_id}"]`);
 				if (userCell !== null) {
 					const wsFastJump = userCell.querySelector(".ws_fast_jump");
 					wsFastJump.insertAdjacentHTML("beforeend", createFastJump.call({ work_schedule_id, objectTimeIn, objectTimeOut }));
@@ -168,6 +170,45 @@ async function requestSchedule(year, month) {
 		})
 		.finally(() => {
 			window.history.replaceState(null, "", "/schedule");
+			const wrapUserSchedule = document.querySelectorAll(".wrap_user_schedule");
+			const wrapUserInfor = document.querySelectorAll(".wrap_user_infor");
+			const filterInput = document.querySelectorAll(".filter_input");
+			const objFilter = {};
+			filterInput.forEach((inp) => {
+				inp.addEventListener("input", (e) => {
+					tableBody.innerHTML = "";
+					objFilter[e.target.name] = inp.value.trim();
+					let arrayFilter = [];
+					wrapUserInfor.forEach((wrap) => {
+						const arrayConditions = [];
+						for (const key in objFilter) {
+							const value = objFilter[key];
+							const regex = new RegExp(value);
+							if (value.length !== 0) {
+								if (regex.test(wrap.querySelector(`.cell_user_${key}`).innerText.toLowerCase())) {
+									arrayConditions.push(true);
+								} else {
+									arrayConditions.push(false);
+								}
+							}
+						}
+						if (arrayConditions.every((condition) => condition === true)) {
+							arrayFilter.push(wrap.parentNode);
+						}
+					});
+					arrayFilter.length !== 0 ? handleInsertFilter(arrayFilter) : handleInsertFilter(wrapUserSchedule);
+					arrayFilter = [];
+				});
+			});
+			function handleInsertFilter(arr) {
+				arr.forEach((node) => {
+					tableBody.appendChild(node);
+				});
+			}
+			addClick("#ws-reset-filter", () => {
+				tableBody.innerHTML = "";
+				handleInsertFilter(wrapUserSchedule);
+			});
 		});
 }
 // employee_avatar: null

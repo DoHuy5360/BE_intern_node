@@ -1,7 +1,7 @@
 #wrap-schedule {
 	margin: 10px 10px 0 10px;
 	width: calc(100% - 125px);
-	height: calc(100% - 10px);
+	height: calc(100% - 45px);
 	overflow: scroll;
 	border: 1px solid var(--sub-cl);
 	scroll-behavior: smooth;
@@ -135,4 +135,41 @@
 }
 .ws_jump_link:active {
 	color: var(--pale-gre-cl);
+}
+#wrap-filter-kit {
+	position: fixed;
+	padding: 5px 0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	background-color: var(--main-cl);
+	user-select: none;
+}
+.wrap_filter_type {
+	display: flex;
+	align-items: center;
+	gap: 5px;
+	font-size: 0.9rem;
+	font-weight: 300;
+}
+.filter_input {
+	outline: unset;
+	border: 1px solid var(--sub-cl);
+	height: 25px;
+	padding: 0 5px;
+	border-radius: 2px;
+	background-color: var(--sub-cl);
+}
+#ws-reset-filter {
+	all: unset;
+	background-color: var(--sub-cl);
+	font-size: 0.9rem;
+	padding: 0px 10px;
+	height: 25px;
+	cursor: pointer;
+	border-radius: 2px;
+}
+.cell_user_id {
+	display: none;
 }
