@@ -4,6 +4,8 @@
 	height: calc(100% - 10px);
 	overflow: scroll;
 	border: 1px solid var(--sub-cl);
+	scroll-behavior: smooth;
+	scroll-padding: 300px;
 }
 .wrap_day_title {
 	display: flex;
@@ -38,6 +40,10 @@
 	display: flex;
 	flex-direction: column;
 	font-size: 0.9rem;
+}
+.ws_cell:target {
+	outline: 1px solid var(--gray-cl);
+	background-color: var(--pale-gre-cl);
 }
 .wrap_user_infor {
 	position: sticky;
@@ -97,4 +103,12 @@
 #wrap-month,
 .wrap_user_infor {
 	padding: 5px;
+}
+.ws_fast_jump {
+	margin: 0;
+	padding-left: 20px;
+}
+.ws_jump_link {
+	color: var(--gray-cl);
+	text-decoration: none;
 }

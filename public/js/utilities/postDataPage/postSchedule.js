@@ -27,7 +27,7 @@ function scaleTime(time) {
 function createWsCell() {
 	const wrap = document.createElement("div");
 	wrap.innerHTML = `
-            <div class="ws_cell">
+            <div id="${this.work_schedule_id}" class="ws_cell">
 				<div class="time_line"></div>
 				<div class="ws_info">
 					<div>${this.work_schedule_place}</div>
@@ -41,7 +41,13 @@ function createWsCell() {
 function createUserCell() {
 	return `
 	<div class="wrap_user_schedule" data-id="${this.employee_id}">
-		<div class="wrap_user_infor">${this.employee_name}</div>
+		<div class="wrap_user_infor">
+			<div>${this.employee_name}</div>
+			<div class="ws_wrap_time_jump">
+				<div>Start at:</div>
+				<ol class="ws_fast_jump"></ol>
+			</div>
+		</div>
 		<div class="wrap_ws" data-day="1"></div>
 		<div class="wrap_ws" data-day="2"></div>
 		<div class="wrap_ws" data-day="3"></div>
@@ -50,6 +56,14 @@ function createUserCell() {
 		<div class="wrap_ws" data-day="6"></div>
 		<div class="wrap_ws" data-day="0"></div>
 	</div>
+	`;
+}
+function createFastJump() {
+	const [hoursIn, minutesIn] = this.timeIn.split(":");
+	return `
+		<li>
+			<a href="#${this.work_schedule_id}" class="ws_jump_link">${hoursIn + ":" + minutesIn}</a>
+		</li>
 	`;
 }
 async function requestScheduleData() {
@@ -65,7 +79,7 @@ async function requestScheduleData() {
 		.then((res) => res.json())
 		.then((data) => {
 			data.records.forEach((record) => {
-				const { work_schedule_time_in, work_schedule_time_out, employee_id } = record;
+				const { work_schedule_time_in, work_schedule_time_out, employee_id, work_schedule_id } = record;
 				const [dateIn, timeIn] = work_schedule_time_in.split("T");
 				const [dateOut, timeOut] = work_schedule_time_out.split("T");
 				const objDateIn = new Date(dateIn);
@@ -75,6 +89,8 @@ async function requestScheduleData() {
 				const wsCell = createWsCell.call({ ...record, timeIn, timeOut });
 				const userCell = document.querySelector(`[data-id="${employee_id}"]`);
 				if (userCell !== null) {
+					const wsFastJump = userCell.querySelector(".ws_fast_jump");
+					wsFastJump.insertAdjacentHTML("beforeend", createFastJump.call({ work_schedule_id, timeIn }));
 					const dayCol = userCell.querySelector(`[data-day="${dayIn}"]`);
 					setLocation(wsCell, timeIn, timeOut);
 					dayCol.appendChild(wsCell);
