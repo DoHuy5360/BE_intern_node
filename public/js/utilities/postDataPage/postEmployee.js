@@ -2,6 +2,7 @@ import { multiAddClick } from "../actions.js";
 import { deleteRequest } from "../request.js";
 
 async function getListUser() {
+	let dataRecords;
 	const token = localStorage.getItem("token");
 	const listEmployee = document.querySelector("#list-employee");
 	await fetch("/api/v2/employee/all-information", {
@@ -14,6 +15,7 @@ async function getListUser() {
 		.then((data) => {
 			const barLoading = document.querySelector("#employee-bar-loading");
 			const { status, numbers, records } = data;
+			dataRecords = records;
 			if (status === 200) {
 				records.forEach((rec, idx) => {
 					listEmployee.insertAdjacentHTML("beforeend", createEmplyeeInfoBar.call({ idx, ...rec }));
@@ -33,8 +35,11 @@ async function getListUser() {
 					}
 				}
 			});
-			multiAddClick(".edit_btn", () => {
-				console.log("Not set");
+			multiAddClick(".edit_btn", (ths) => {
+				const foundInfo = dataRecords.find((rec) => {
+					return rec.account_id === ths.getAttribute("data-id");
+				});
+				document.body.insertAdjacentHTML("beforeend", createElyEditForm.call(foundInfo));
 			});
 			multiAddClick(".view_btn", () => {
 				console.log("Not set");
@@ -129,13 +134,51 @@ function createEmplyeeInfoBar() {
             <div data-name="email">${this.account_email}</div>
             <div data-name="position">${this.employee_position}</div>
             <div data-name="role">${this.account_role}</div>
+            <div data-name="address">${this.employee_address}</div>
         </div>
         <div class="wrap_option_btn">
             <div class="delete_btn option_btn" data-id="${this.account_id}" data-email="${this.account_email}">Delete</div>
-            <div class="edit_btn option_btn">Edit</div>
+            <div class="edit_btn option_btn" data-id="${this.account_id}">Edit</div>
             <div class="view_btn option_btn">View</div>
         </div>
     </div>
     `;
+}
+function createElyEditForm() {
+	return `
+	<div id="wrap-ely-edit-form">
+		<form id="ely-form-edit">
+			<div id="ely-edit-title">Edit</div>
+			<div id="wrap-ely-inp">
+				<div class="ely_label_inp">
+					<label for="ely-name">Name</label>
+					<input class="ely_inp" id="ely-name" name="name" type="text" value="${this.employee_name}"/>
+				</div>
+				</div>
+				<div class="ely_label_inp">
+					<label for="ely-phone">Phone</label>
+					<input class="ely_inp" id="ely-phone" name="phone" type="text" value="${this.employee_phone}"/>
+				</div>
+				<div class="ely_label_inp">
+					<label for="ely-role">Role</label>
+					<input class="ely_inp" id="ely-role" name="role" type="text" value="${this.account_role}"/>
+				</div>
+				<div class="ely_label_inp">
+					<label for="ely-position">Position</label>
+					<input class="ely_inp" id="ely-position" name="position" type="text" value="${this.employee_position}"/>
+				<div class="ely_label_inp">
+					<label for="ely-address">Address</label>
+					<textarea class="ely_inp area" id="ely-address" name="address" type="text">
+						${this.employee_address.trim()}
+					</textarea>
+				</div>
+			</div>
+			<div id="wrap-edit-btn">
+				<button id="ely-edit-cancel" type="button" onclick="this.parentNode.parentNode.parentNode.remove()">Cancel</button>
+				<button id="ely-edit-submit" type="submit">Submit</button>
+			</div>
+		</form>
+	</div>
+	`;
 }
 export { getListUser };
