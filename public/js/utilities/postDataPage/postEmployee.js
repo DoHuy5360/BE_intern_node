@@ -1,3 +1,6 @@
+import { multiAddClick } from "../actions.js";
+import { deleteRequest } from "../request.js";
+
 async function getListUser() {
 	const token = localStorage.getItem("token");
 	const listEmployee = document.querySelector("#list-employee");
@@ -20,19 +23,20 @@ async function getListUser() {
 		})
 		.finally(() => {
 			window.history.replaceState(null, "", "/employee");
-			setEventClick(".delete_btn", async (btn) => {
+			multiAddClick(".delete_btn", async (btn) => {
 				const isAccept = await popUp(`Delete This Account?<br>${btn.getAttribute("data-email")}`);
+				const employeeId = btn.getAttribute("data-id");
 				if (isAccept) {
-					const isDeleted = requestAction(`/api/v2/account/${btn.getAttribute("data-id")}/delete`, "DELETE");
+					const isDeleted = await deleteRequest(`/api/v2/account/${employeeId}/delete`);
 					if (isDeleted) {
-						document.querySelector(`[data-bar="${btn.getAttribute("data-id")}"]`).remove();
+						document.querySelector(`[data-bar="${employeeId}"]`).remove();
 					}
 				}
 			});
-			setEventClick(".edit_btn", () => {
+			multiAddClick(".edit_btn", () => {
 				console.log("Not set");
 			});
-			setEventClick(".view_btn", () => {
+			multiAddClick(".view_btn", () => {
 				console.log("Not set");
 			});
 			const arrayWrapars = document.querySelectorAll("#list-employee .wrap_employee_bar");
@@ -87,17 +91,6 @@ function handleFilter(inputValue, type, arrayBars, arrayWrapars) {
 	return filterTray.length === 0 ? arrayWrapars : filterTray;
 }
 
-async function requestAction(url, method) {
-	return await fetch(url, {
-		method,
-		headers: {
-			Authorization: `Bearer ${localStorage.getItem("token")}`,
-		},
-	})
-		.then((res) => res.json())
-		.then((mes) => (mes.deleted === 1 ? true : false));
-}
-
 async function popUp(message) {
 	document.body.insertAdjacentHTML(
 		"beforeend",
@@ -125,13 +118,7 @@ async function popUp(message) {
 	popupForm.remove();
 	return isDelete;
 }
-function setEventClick(className, callback) {
-	document.querySelectorAll(className).forEach((btn) => {
-		btn.addEventListener("click", (e) => {
-			callback(btn);
-		});
-	});
-}
+
 function createEmplyeeInfoBar() {
 	return `
     <div class="wrap_employee_bar" data-bar="${this.account_id}">

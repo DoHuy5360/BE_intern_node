@@ -1,4 +1,5 @@
 import { addClick, multiAddClick } from "../actions.js";
+import { deleteRequest } from "../request.js";
 
 function createHeadquarterCard() {
 	return `
@@ -20,7 +21,7 @@ function createHeadquarterCard() {
     `;
 }
 
-function getHeadquarterData() {
+async function getHeadquarterData() {
 	const listHeadquarter = document.querySelector("#list-headquarter");
 	fetch("/api/v2/headquarter/all-info")
 		.then((res) => res.json())
@@ -35,15 +36,10 @@ function getHeadquarterData() {
 				const hqtId = ths.getAttribute("data-del-id");
 				const isAccept = await popUp("Delete this Headquarter?");
 				if (isAccept) {
-					fetch(`/api/v2/headquarter/${hqtId}/delete`, {
-						method: "DELETE",
-					})
-						.then((res) => res.json())
-						.then((data) => {
-							if (data.deleted) {
-								document.querySelector(`[data-hqt-id="${hqtId}"]`).remove();
-							}
-						});
+					const isDeleted = await deleteRequest(`/api/v2/headquarter/${hqtId}/delete`);
+					if (isDeleted) {
+						document.querySelector(`[data-hqt-id="${hqtId}"]`).remove();
+					}
 				}
 			});
 		});
