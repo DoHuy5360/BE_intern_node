@@ -1,4 +1,4 @@
-import { addClick } from "../actions.js";
+import { addClick, multiAddClick } from "../actions.js";
 
 function setLocation(wsCell, timeIn, timeOut) {
 	const sumIn = timeIn.hours * 60 + timeIn.minutes;
@@ -11,9 +11,15 @@ function setLocation(wsCell, timeIn, timeOut) {
 		height: "3px",
 		background: "black",
 	});
+	// Object.assign(wsCell.style, {
+	// 	"margin-left": `${timeStart}px`,
+	// 	width: "fit-content",
+	// });
 	Object.assign(wsCell.style, {
 		"margin-left": `${timeStart}px`,
 		width: "fit-content",
+		cursor: "pointer",
+		"user-select": "none",
 	});
 }
 function scaleTimeLine(time) {
@@ -24,6 +30,20 @@ function scaleTimeLine(time) {
 	return (time * 51) / 60;
 }
 
+// function createWsCell() {
+// 	const wrap = document.createElement("div");
+// 	wrap.innerHTML = `
+//             <div id="${this.work_schedule_id}" class="ws_cell">
+// 				<div class="time_line"></div>
+// 				<div class="ws_info">
+// 					<div>${this.work_schedule_place}</div>
+// 					<div>${this.employee_name}</div>
+// 					<div>${this.objectTimeIn.both} - ${this.objectTimeOut.both}</div>
+// 				</div>
+//             </div>
+//         `;
+// 	return wrap.querySelector(".ws_cell");
+// }
 function createWsCell() {
 	const wrap = document.createElement("div");
 	wrap.innerHTML = `
@@ -31,8 +51,6 @@ function createWsCell() {
 				<div class="time_line"></div>
 				<div class="ws_info">
 					<div>${this.work_schedule_place}</div>
-					<div>${this.employee_name}</div>
-					<div>${this.objectTimeIn.both} - ${this.objectTimeOut.both}</div>
 				</div>
             </div>
         `;
@@ -210,6 +228,14 @@ async function requestSchedule(year, month) {
 			addClick("#ws-reset-filter", () => {
 				tableBody.innerHTML = "";
 				handleInsertFilter(wrapUserSchedule);
+			});
+			let tempLink;
+			multiAddClick(".ws_jump_link", (ths) => {
+				if (tempLink !== undefined) {
+					tempLink.classList.remove("selected");
+				}
+				ths.classList.add("selected");
+				tempLink = ths;
 			});
 		});
 }

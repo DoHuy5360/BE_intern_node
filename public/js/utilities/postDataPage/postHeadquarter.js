@@ -10,7 +10,7 @@ function createHeadquarterCard() {
 			<div class="hqt_address">${this.headquarter_address}</div>
 			<div class="number_of_employee">${this.number_of_employees}</div>
 			<div class="wrap_hqt_options">
-				<div class="option_btn del_option" data-del-id="${this.headquarter_id}">
+				<div class="option_btn del_option" data-del-id="${this.headquarter_id}" data-hqt-name="${this.headquarter_name}">
 					<i class="fa-solid fa-trash"></i>
 				</div>
 				<div class="option_btn edit_option">
@@ -34,7 +34,7 @@ async function getHeadquarterData() {
 			window.history.replaceState("", null, "/headquarter");
 			multiAddClick(".del_option", async (ths) => {
 				const hqtId = ths.getAttribute("data-del-id");
-				const isAccept = await popUp("Delete this Headquarter?");
+				const isAccept = await popUp(`Delete this Headquarter?<br>${ths.getAttribute("data-hqt-name")}`);
 				if (isAccept) {
 					const isDeleted = await deleteRequest(`/api/v2/headquarter/${hqtId}/delete`);
 					if (isDeleted) {

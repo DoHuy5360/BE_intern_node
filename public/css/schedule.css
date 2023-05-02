@@ -1,11 +1,12 @@
 #wrap-schedule {
 	margin: 10px 10px 0 10px;
-	width: calc(100% - 125px);
+	width: calc(100% - 175px);
 	height: calc(100% - 45px);
 	overflow: scroll;
 	border: 1px solid var(--sub-cl);
 	scroll-behavior: smooth;
 	scroll-padding: 300px;
+	padding-bottom: 1px;
 }
 .wrap_day_title {
 	display: flex;
@@ -36,19 +37,38 @@
 	background-color: var(--main-cl);
 }
 .ws_info {
-	padding: 5px;
+	padding: 0 5px;
 	display: flex;
 	flex-direction: column;
 	font-size: 0.9rem;
 }
 .ws_cell:target {
-	outline: 1px solid var(--gray-cl);
 	background-color: var(--pale-gre-cl);
 }
 .wrap_user_infor {
 	border-right: 1px solid var(--sub-cl);
 	position: sticky;
 	left: 0;
+	user-select: none;
+}
+.ws_fast_jump {
+	counter-reset: item;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.ws_fast_jump li {
+	padding: 1px 5px;
+}
+.ws_fast_jump li:before {
+	content: counter(item, decimal-leading-zero) ". ";
+	counter-increment: item;
+	width: 1em;
+	display: inline-block;
+	text-align: right;
+	margin-right: 0.5em;
+	font-size: 0.9rem;
+	padding: 1px 0;
 }
 .time_cell {
 	text-align: center;
@@ -64,7 +84,7 @@
 .wrap_user_schedule,
 #table-header {
 	display: grid;
-	grid-template-columns: 170px repeat(7, 1fr);
+	grid-template-columns: 125px repeat(7, 1fr);
 	gap: 1px;
 	border-bottom: 1px solid var(--sub-cl);
 }
@@ -90,6 +110,7 @@
 	flex-direction: column;
 	gap: 1px;
 	background-color: var(--sub-cl);
+	padding-top: 30px;
 }
 #option-year,
 #option-month {
@@ -121,20 +142,27 @@
 }
 .date_title,
 #wrap-year,
-#wrap-month,
-.wrap_user_infor {
+#wrap-month {
 	padding: 5px;
 }
-.ws_fast_jump {
-	margin: 0;
-	padding-left: 20px;
+.cell_user_name {
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: var(--gray-cl);
+	padding: 5px;
 }
 .ws_jump_link {
 	color: var(--gray-cl);
 	text-decoration: none;
 }
-.ws_jump_link:active {
-	color: var(--pale-gre-cl);
+li:has(.ws_jump_link:hover),
+li:has(.ws_jump_link.selected) {
+	background-color: var(--sub-cl);
+}
+.ws_jump_link.selected {
+	font-weight: 500;
+	transition: 200ms ease-in-out;
+	background-color: var(--sub-cl);
 }
 #wrap-filter-kit {
 	position: fixed;
