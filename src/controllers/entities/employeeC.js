@@ -1,8 +1,8 @@
 import { bcryptEncoder } from "../../script/enScriptHandler.js";
 import { getTimeZ } from "../../script/timeProvider.js";
 import { uuidPrefix } from "../../script/IdProvider.js";
-import CRUDTemplate from "../../database/curdTemplate.js";
-import { accountCURDTemplate } from "./accountC.js";
+import CRUDTemplate from "../../database/crudTemplate.js";
+import { accountCRUDTemplate } from "./accountC.js";
 import pool from "../../database/connect.js";
 
 const employeeCRUDTemplate = new CRUDTemplate("employee");
@@ -46,7 +46,7 @@ const createOne = async (req, res) => {
 		create_at: getTimeZ(),
 		update_at: getTimeZ(),
 	});
-	await accountCURDTemplate.create({
+	await accountCRUDTemplate.create({
 		account_id: uuidPrefix("TK"),
 		account_role: accountRole,
 		account_email: accountEmail,

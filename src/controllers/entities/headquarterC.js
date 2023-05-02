@@ -1,6 +1,6 @@
 import { getTimeZ } from "../../script/timeProvider.js";
 import { uuidPrefix } from "../../script/IdProvider.js";
-import CRUDTemplate from "../../database/curdTemplate.js";
+import CRUDTemplate from "../../database/crudTemplate.js";
 import pool from "../../database/connect.js";
 
 const headquarterCRUDTemplate = new CRUDTemplate("headquarter");
