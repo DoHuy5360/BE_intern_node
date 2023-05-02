@@ -49,9 +49,9 @@
 .option_btn:hover {
 	background-color: var(--main-cl);
 }
-#del-option {
+.del_option {
 	background-color: var(--pale-red-cl);
 }
-#edit-option {
+.edit_option {
 	background-color: var(--pale-yel-cl);
 }

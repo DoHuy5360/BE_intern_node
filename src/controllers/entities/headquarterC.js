@@ -44,10 +44,12 @@ const createOne = async (req, res) => {
 const getHeadquarterAndEmployee = (req, res) => {
 	pool.query(
 		`
-	SELECT h.headquarter_id, headquarter_name, headquarter_address, COUNT(employee_id) AS number_of_employees
-	FROM headquarter h, employee e
-	WHERE e.headquarter_id = h.headquarter_id
-	GROUP BY h.headquarter_id, headquarter_name, headquarter_address
+		SELECT h.headquarter_id, headquarter_name, headquarter_address, 
+		COALESCE(COUNT(employee_id)) AS number_of_employees
+			FROM headquarter h
+			LEFT JOIN employee e
+			ON e.headquarter_id = h.headquarter_id
+			GROUP BY h.headquarter_id, headquarter_name, headquarter_address
 	`,
 		(err, records) => {
 			if (err) {
