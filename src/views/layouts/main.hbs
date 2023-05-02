@@ -9,6 +9,7 @@
 		:root{
 			--main-cl : #FFFFFF;
 			--sub-cl: #EDEDED;
+			--pale-gray-cl: #eaeaea;
 			--gray-cl: #939393; 
 			--pale-red-cl: #f8baba;
 			--pale-yel-cl: #eeee00;
@@ -19,6 +20,23 @@
 			padding: 0;
 			box-sizing: border-box;
 			font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif;
+		}
+		::-webkit-scrollbar {
+			width: 10px; 
+			height: 10px;
+			background-color: var(--main);
+		}
+
+		::-webkit-scrollbar-track {
+			background: var(--main-cl);
+		}
+
+		::-webkit-scrollbar-thumb {
+		background: var(--pale-gray-cl);
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+		background: var(--gray-cl);
 		}
 		#main-layout{
 			display: flex;
