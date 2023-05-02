@@ -77,7 +77,7 @@ async function requestScheduleData() {
 	theYear.innerText = currentYear;
 	let monthIndex = date.getMonth();
 	theMonth.innerText = arrayMonths[monthIndex];
-	const currentMonth = monthIndex + 1;
+	let currentMonth = monthIndex + 1;
 	tableBody = document.querySelector("#table-body");
 	await fetch("/api/v2/employee/all-name")
 		.then((res) => res.json())
@@ -102,6 +102,7 @@ async function requestScheduleData() {
 				if (monthIndex > 0) {
 					handleUpdateNewWs(() => {
 						theMonth.innerText = arrayMonths[--monthIndex];
+						currentMonth--;
 					});
 				}
 			});
@@ -109,6 +110,7 @@ async function requestScheduleData() {
 				if (monthIndex < 11) {
 					handleUpdateNewWs(() => {
 						theMonth.innerText = arrayMonths[++monthIndex];
+						currentMonth++;
 					});
 				}
 			});

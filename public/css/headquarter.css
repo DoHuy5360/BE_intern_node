@@ -36,6 +36,11 @@
 	display: flex;
 	gap: 10px;
 }
+.hqt_id {
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
 .option_btn {
 	all: unset;
 	padding: 10px;
