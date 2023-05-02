@@ -1,6 +1,7 @@
 import { getTimeZ } from "../../script/timeProvider.js";
 import { uuidPrefix } from "../../script/IdProvider.js";
 import CRUDTemplate from "../../database/curdTemplate.js";
+import pool from "../../database/connect.js";
 
 const headquarterCRUDTemplate = new CRUDTemplate("headquarter");
 
@@ -40,7 +41,26 @@ const createOne = async (req, res) => {
 		})
 	);
 };
-const method3 = (req, res) => {};
+const getHeadquarterAndEmployee = (req, res) => {
+	pool.query(
+		`
+	SELECT h.headquarter_id, headquarter_name, headquarter_address, COUNT(employee_id) AS number_of_employees
+	FROM headquarter h, employee e
+	WHERE e.headquarter_id = h.headquarter_id
+	GROUP BY h.headquarter_id, headquarter_name, headquarter_address
+	`,
+		(err, records) => {
+			if (err) {
+				console.log(err);
+				return;
+			}
+			res.json({
+				status: 200,
+				records: records.rows,
+			});
+		}
+	);
+};
 const method4 = (req, res) => {};
 
-export { showAll, showOne, updateOne, deleteOne, createOne };
+export { showAll, showOne, updateOne, deleteOne, createOne, getHeadquarterAndEmployee };

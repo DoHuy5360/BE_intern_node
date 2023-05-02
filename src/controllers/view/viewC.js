@@ -19,6 +19,9 @@ const postEmployee = (req, res) => {
 const postSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: false });
 };
+const postHeadquarter = (req, res) => {
+	res.render("headquarter", { title: "Schedule", layout: false });
+};
 
 const getDashboard = (req, res) => {
 	res.render("dashboard", { title: "Dashboard", layout: "main" });
@@ -29,5 +32,8 @@ const getEmployee = (req, res) => {
 const getSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: "main" });
 };
+const getHeadquarter = (req, res) => {
+	res.render("headquarter", { title: "Headquarter", layout: "main" });
+};
 
-export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule };
+export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule, postHeadquarter, getHeadquarter };

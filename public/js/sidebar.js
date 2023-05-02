@@ -1,5 +1,6 @@
 import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
 import { getListUser } from "./utilities/postDataPage/postEmployee.js";
+import { getHeadquarterData } from "./utilities/postDataPage/postHeadquarter.js";
 import { requestScheduleData } from "./utilities/postDataPage/postSchedule.js";
 
 const navigateLinks = document.querySelectorAll(".navigate_link");
@@ -48,6 +49,18 @@ navigateLinks.forEach((link) => {
 					})
 					.finally(() => {
 						requestScheduleData();
+					});
+				break;
+			case "headquarter":
+				fetch("/headquarter", {
+					method: "POST",
+				})
+					.then((res) => res.text())
+					.then((html) => {
+						bodyContent.innerHTML = html;
+					})
+					.finally(() => {
+						getHeadquarterData();
 					});
 				break;
 		}

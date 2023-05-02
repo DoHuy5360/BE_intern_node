@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { admin, login, loginPost, postEmployee, postDashboard, getDashboard, getEmployee, getSchedule, postSchedule } from "../../controllers/view/viewC.js";
+import { admin, login, loginPost, postEmployee, postDashboard, getDashboard, getEmployee, getSchedule, postSchedule, getHeadquarter, postHeadquarter } from "../../controllers/view/viewC.js";
 import { userAuthorization } from "../../middlewares/middlewarePort.js";
 import { userAuthorizationReloadPage } from "../../middlewares/auth/authorization.js";
 
@@ -13,9 +13,11 @@ viewR.get("/admin", userAuthorizationReloadPage, admin);
 viewR.get("/dashboard", getDashboard);
 viewR.get("/employee", getEmployee);
 viewR.get("/schedule", getSchedule);
+viewR.get("/headquarter", getHeadquarter);
 
 viewR.post("/dashboard", postDashboard);
 viewR.post("/employee", postEmployee);
 viewR.post("/schedule", postSchedule);
+viewR.post("/headquarter", postHeadquarter);
 
 export { viewR };

@@ -1,0 +1,57 @@
+#wrap-hqt {
+	padding: 0 20px;
+}
+.wrap_hqt_bar {
+	display: flex;
+	font-size: 0.9rem;
+}
+#wrap-title-bar {
+	display: flex;
+}
+#wrap-title-bar {
+	background-color: var(--sub-cl);
+}
+.wrap_hqt_bar {
+	transition: 200ms ease-in-out;
+}
+.wrap_hqt_bar:hover {
+	background-color: var(--sub-cl);
+}
+#wrap-title-bar,
+.wrap_hqt_bar {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 50px repeat(5, 1fr);
+	padding: 10px;
+	align-items: center;
+}
+#list-headquarter {
+	border: 1px solid var(--sub-cl);
+	border-top-color: var(--main-cl);
+}
+.headquarter_card {
+	display: flex;
+}
+.wrap_hqt_options {
+	display: flex;
+	gap: 10px;
+}
+.option_btn {
+	all: unset;
+	padding: 10px;
+	border-radius: 2px;
+	font-size: 0.7rem;
+	width: 40px;
+	cursor: pointer;
+	user-select: none;
+	text-align: center;
+}
+.option_btn:hover {
+	background-color: var(--main-cl);
+}
+#del-option {
+	background-color: var(--pale-red-cl);
+}
+#edit-option {
+	background-color: var(--pale-yel-cl);
+}
