@@ -168,9 +168,7 @@ function createElyEditForm() {
 					<input class="ely_inp" id="ely-position" name="position" type="text" value="${this.employee_position}"/>
 				<div class="ely_label_inp">
 					<label for="ely-address">Address</label>
-					<textarea class="ely_inp area" id="ely-address" name="address" type="text">
-						${this.employee_address.trim()}
-					</textarea>
+					<textarea class="ely_inp area" id="ely-address" name="address" type="text">${this.employee_address}</textarea>
 				</div>
 			</div>
 			<div id="wrap-edit-btn">

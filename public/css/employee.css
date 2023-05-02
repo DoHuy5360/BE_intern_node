@@ -173,6 +173,7 @@
 .ely_inp.area {
 	height: 150px;
 	resize: unset;
+	white-space: pre-wrap;
 }
 #wrap-edit-btn {
 	display: flex;
