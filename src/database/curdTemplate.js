@@ -63,7 +63,7 @@ class CRUDTemplate {
 		const result = await this.handler(`DELETE FROM ${this.name} WHERE ${this.name}_id='${id}'`);
 		return {
 			status: 200,
-			deteted: result.rowCount,
+			deleted: result.rowCount,
 		};
 	}
 }
