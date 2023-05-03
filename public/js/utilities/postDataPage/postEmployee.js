@@ -178,10 +178,6 @@ function createElyEditForm() {
 					<input class="ely_inp" id="ely-name" name="name" type="text" value="${this.employee_name}" disabled/>
 				</div>
 				<div class="ely_label_inp">
-					<label for="ely-phone">Phone</label>
-					<input class="ely_inp" id="ely-phone" name="phone" type="text" value="${this.employee_phone}" disabled/>
-				</div>
-				<div class="ely_label_inp">
 					<label for="ely-phone">Salary</label>
 					<input class="ely_inp" id="ely-salary" name="salary" type="text" value="${this.employee_salary}"/>
 				</div>
@@ -196,10 +192,6 @@ function createElyEditForm() {
 				<div class="ely_label_inp">
 					<label for="ely-position">Position</label>
 					<input class="ely_inp" id="ely-position" name="position" type="text" value="${this.employee_position}"/>
-				</div>
-				<div class="ely_label_inp">
-					<label for="ely-address">Address</label>
-					<textarea class="ely_inp area" id="ely-address" name="address" type="text">${this.employee_address}</textarea>
 				</div>
 			</div>
 			<div id="wrap-edit-btn">
