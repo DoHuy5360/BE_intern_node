@@ -12,10 +12,11 @@ async function fetchBody(url, body, method) {
 	return await fetch(url, {
 		method,
 		headers: {
+			"Content-Type": "application/json",
 			Authorization: `Bearer ${token}`,
 		},
 		body: JSON.stringify(body),
-	}).then((res) => res);
+	}).then((res) => res.json());
 }
 async function getRequest(url) {
 	return (await fetchNoBody(url, "GET")).json();
@@ -26,7 +27,7 @@ async function postRequest(url) {
 }
 async function putRequest(url, body) {
 	const res = await fetchBody(url, body, "PUT");
-	return res.json();
+	return res.updated === 1 ? true : false;
 }
 async function deleteRequest(url) {
 	const data = await fetchNoBody(url, "DELETE");

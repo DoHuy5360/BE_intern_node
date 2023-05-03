@@ -40,7 +40,7 @@ app.use("/", viewR);
 
 app.use("/api/v2/login", authentication, loginR);
 app.use("/api/v2/index", adminAuthorization, indexR);
-app.use("/api/v2/account", adminAuthorization, accountR);
+app.use("/api/v2/account", accountR);
 app.use("/api/v2/employee", employeeR);
 app.use("/api/v2/headquarter", headquarterR);
 app.use("/api/v2/workSchedule", workScheduleR);

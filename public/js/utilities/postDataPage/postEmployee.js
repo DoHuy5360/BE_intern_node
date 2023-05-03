@@ -1,5 +1,5 @@
 import { multiAddClick } from "../actions.js";
-import { deleteRequest } from "../request.js";
+import { deleteRequest, putRequest } from "../request.js";
 
 async function getListUser() {
 	let dataRecords;
@@ -36,10 +36,25 @@ async function getListUser() {
 				}
 			});
 			multiAddClick(".edit_btn", (ths) => {
+				const accountId = ths.getAttribute("data-id");
 				const foundInfo = dataRecords.find((rec) => {
-					return rec.account_id === ths.getAttribute("data-id");
+					return rec.account_id === accountId;
 				});
 				document.body.insertAdjacentHTML("beforeend", createElyEditForm.call(foundInfo));
+				const editForm = document.querySelector("#ely-form-edit");
+				editForm.addEventListener("submit", async (e) => {
+					e.preventDefault();
+					const isUpdated = await putRequest(`/api/v2/account/${accountId}/update/user`, {
+						headquarterId: editForm.querySelector("[name='headquarter']").value,
+						accountRole: editForm.querySelector("[name='role']").value,
+						employeePosition: editForm.querySelector("[name='position']").value,
+						employeeSalary: editForm.querySelector("[name='salary']").value,
+					});
+					console.log(isUpdated);
+					if (isUpdated) {
+						editForm.parentNode.remove();
+					}
+				});
 			});
 			multiAddClick(".view_btn", () => {
 				console.log("Not set");
@@ -126,7 +141,7 @@ async function popUp(message) {
 
 function createEmplyeeInfoBar() {
 	return `
-    <div class="wrap_employee_bar" data-bar="${this.account_id}">
+    <div  class="wrap_employee_bar" data-bar="${this.account_id}">
         <div class="bar_format info-bar">
             <div>${this.idx + 1}</div>
             <div data-name="id">${this.account_id}</div>
@@ -152,12 +167,20 @@ function createElyEditForm() {
 			<div id="wrap-ely-inp">
 				<div class="ely_label_inp">
 					<label for="ely-name">Name</label>
-					<input class="ely_inp" id="ely-name" name="name" type="text" value="${this.employee_name}"/>
+					<input class="ely_inp" id="ely-name" name="name" type="text" value="${this.employee_name}" disabled/>
 				</div>
 				</div>
 				<div class="ely_label_inp">
 					<label for="ely-phone">Phone</label>
-					<input class="ely_inp" id="ely-phone" name="phone" type="text" value="${this.employee_phone}"/>
+					<input class="ely_inp" id="ely-phone" name="phone" type="text" value="${this.employee_phone}" disabled/>
+				</div>
+				<div class="ely_label_inp">
+					<label for="ely-phone">Salary</label>
+					<input class="ely_inp" id="ely-salary" name="salary" type="text" value="${this.employee_salary}"/>
+				</div>
+				<div class="ely_label_inp">
+					<label for="ely-phone">Headquarter</label>
+					<input class="ely_inp" id="ely-headquarter" name="headquarter" type="text" value="${this.headquarter_id}"/>
 				</div>
 				<div class="ely_label_inp">
 					<label for="ely-role">Role</label>

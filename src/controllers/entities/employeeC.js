@@ -90,7 +90,6 @@ const readAllInfo = (req, res) => {
 		FROM employee e, account a , headquarter h 
 		WHERE e.account_id = a.account_id 
 		AND e.headquarter_id = h.headquarter_id
-		LIMIT 30
 	`,
 		(err, records) => {
 			if (err) {

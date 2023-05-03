@@ -168,10 +168,10 @@
 	border-radius: 2px;
 	background-color: var(--sub-cl);
 	padding: 5px;
-	height: 25px;
+	height: 30px;
 }
 .ely_inp.area {
-	height: 150px;
+	height: 100px;
 	resize: unset;
 	white-space: pre-wrap;
 }
