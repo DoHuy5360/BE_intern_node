@@ -25,7 +25,8 @@ async function getListUser() {
 		})
 		.finally(() => {
 			window.history.replaceState(null, "", "/employee");
-			multiAddClick(".delete_btn", async (btn) => {
+			multiAddClick(".delete_btn", async (btn, e) => {
+				e.stopImmediatePropagation();
 				const isAccept = await popUp(`Delete This Account?<br>${btn.getAttribute("data-email")}`);
 				const employeeId = btn.getAttribute("data-id");
 				if (isAccept) {
@@ -35,7 +36,8 @@ async function getListUser() {
 					}
 				}
 			});
-			multiAddClick(".edit_btn", (ths) => {
+			multiAddClick(".edit_btn", (ths, e) => {
+				e.stopImmediatePropagation();
 				const accountId = ths.getAttribute("data-id");
 				const foundInfo = dataRecords.find((rec) => {
 					return rec.account_id === accountId;
@@ -55,11 +57,16 @@ async function getListUser() {
 					}
 				});
 			});
-			multiAddClick(".view_btn", () => {
-				console.log("Not set");
-			});
 			const arrayWrapars = document.querySelectorAll("#list-employee .wrap_employee_bar");
 			const arrayBars = document.querySelectorAll(".info-bar");
+			multiAddClick(".info-bar", (ths) => {
+				const accountId = ths.getAttribute("data-bar");
+				const foundAc = dataRecords.find((rec) => {
+					return rec.account_id === accountId;
+				});
+				console.log(foundAc);
+				document.body.insertAdjacentHTML("beforeend", createElyViewForm.call(foundAc));
+			});
 			const filterInputs = document.querySelectorAll(".filter_input");
 			filterInputs.forEach((inp) => {
 				let delayFilter;
@@ -140,21 +147,23 @@ async function popUp(message) {
 
 function createEmplyeeInfoBar() {
 	return `
-    <div  class="wrap_employee_bar" data-bar="${this.account_id}">
-        <div class="bar_format info-bar">
-            <div>${this.idx + 1}</div>
-            <div data-name="id">${this.account_id}</div>
-            <div data-name="name">${this.employee_name}</div>
-            <div data-name="email">${this.account_email}</div>
-            <div data-name="position">${this.employee_position}</div>
-            <div data-name="role">${this.account_role}</div>
-            <div data-name="address">${this.employee_address}</div>
-            <div data-name="gender">${this.employee_gender ? "Male" : "Female"}</div>
-        </div>
-        <div class="wrap_option_btn">
-            <div class="delete_btn option_btn" data-id="${this.account_id}" data-email="${this.account_email}">Delete</div>
-            <div class="edit_btn option_btn" data-id="${this.account_id}">Edit</div>
-        </div>
+	<div class="bar_format info-bar" data-bar="${this.account_id}">
+		<div>${this.idx + 1}</div>
+		<div data-name="id">${this.account_id}</div>
+		<div data-name="name">${this.employee_name}</div>
+		<div data-name="email">${this.account_email}</div>
+		<div data-name="position">${this.employee_position}</div>
+		<div data-name="role">${this.account_role}</div>
+		<div data-name="address">${this.employee_address}</div>
+		<div data-name="gender">${this.employee_gender ? "Male" : "Female"}</div>
+		<div class="wrap_option_btn">
+			<div class="delete_btn option_btn" data-id="${this.account_id}" data-email="${this.account_email}">
+				<i class="fa-solid fa-trash"></i>
+			</div>
+			<div class="edit_btn option_btn" data-id="${this.account_id}">
+				<i class="fa-solid fa-pen-to-square"></i>
+			</div>
+		</div>
     </div>
     `;
 }
@@ -168,7 +177,6 @@ function createElyEditForm() {
 					<label for="ely-name">Name</label>
 					<input class="ely_inp" id="ely-name" name="name" type="text" value="${this.employee_name}" disabled/>
 				</div>
-				</div>
 				<div class="ely_label_inp">
 					<label for="ely-phone">Phone</label>
 					<input class="ely_inp" id="ely-phone" name="phone" type="text" value="${this.employee_phone}" disabled/>
@@ -179,7 +187,7 @@ function createElyEditForm() {
 				</div>
 				<div class="ely_label_inp">
 					<label for="ely-phone">Headquarter</label>
-					<input class="ely_inp" id="ely-headquarter" name="headquarter" type="text" value="${this.headquarter_id}"/>
+					<input class="ely_inp" id="ely-headquarter" name="headquarter" type="text" value="${this.headquarter_name}"/>
 				</div>
 				<div class="ely_label_inp">
 					<label for="ely-role">Role</label>
@@ -188,6 +196,7 @@ function createElyEditForm() {
 				<div class="ely_label_inp">
 					<label for="ely-position">Position</label>
 					<input class="ely_inp" id="ely-position" name="position" type="text" value="${this.employee_position}"/>
+				</div>
 				<div class="ely_label_inp">
 					<label for="ely-address">Address</label>
 					<textarea class="ely_inp area" id="ely-address" name="address" type="text">${this.employee_address}</textarea>
@@ -198,6 +207,56 @@ function createElyEditForm() {
 				<button id="ely-edit-submit" type="submit">Submit</button>
 			</div>
 		</form>
+	</div>
+	`;
+}
+function createElyViewForm() {
+	return `
+	<div id="wrap-ely-view">
+		<div id="wrap-user-info">
+			<div id="ely-close-view" onclick="this.parentNode.parentNode.remove()">
+				<i class="fa-solid fa-xmark"></i>
+			</div>
+			<div id="wrap-ely-line">
+				<div class="ely_label_info">
+					<label for="ely-name-info">Name</label>
+					<input class="ely_info" id="ely-name-info" name="name" type="text" readonly value="${this.employee_name}"/>
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-email-info">Email</label>
+					<input class="ely_info" id="ely-email-info" name="email" type="text" readonly value="${this.account_email}"/>
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-phone-info">Phone</label>
+					<input class="ely_info" id="ely-phone-info" name="phone" type="text" readonly value="${this.employee_phone}"/>
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-salary-info">Salary</label>
+					<input class="ely_info" id="ely-salary" name="salary" type="text" readonly value="${this.employee_salary}"/>
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-headquarter-info">Headquarter</label>
+					<input class="ely_info" id="ely-headquarter" name="headquarter" type="text" readonly value="${this.headquarter_name}"/>
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-role-info">Role</label>
+					<input class="ely_info" id="ely-role" name="role" type="text" readonly value="${this.account_role}"/>
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-position-info">Position</label>
+					<input class="ely_info" id="ely-position" name="position" type="text" readonly value="${this.employee_position}"/>
+				</div>
+			</div>
+			<div id="ely-avatar-address">
+				<div id="wrap-avatar-info">
+					<img src="https://th.bing.com/th/id/OIP.gMZZVC_8fsOKN2iD5Ff_2QAAAA?pid=ImgDet&rs=1" alt="" draggable="false">
+				</div>
+				<div class="ely_label_info">
+					<label for="ely-address-info">Address</label>
+					<textarea id="address-area" id="ely-address" name="address" type="text" readonly>${this.employee_address}</textarea>
+				</div>
+			</div>
+		</div>
 	</div>
 	`;
 }
