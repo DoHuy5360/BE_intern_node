@@ -50,7 +50,6 @@ async function getListUser() {
 						employeePosition: editForm.querySelector("[name='position']").value,
 						employeeSalary: editForm.querySelector("[name='salary']").value,
 					});
-					console.log(isUpdated);
 					if (isUpdated) {
 						editForm.parentNode.remove();
 					}
@@ -150,11 +149,11 @@ function createEmplyeeInfoBar() {
             <div data-name="position">${this.employee_position}</div>
             <div data-name="role">${this.account_role}</div>
             <div data-name="address">${this.employee_address}</div>
+            <div data-name="gender">${this.employee_gender ? "Male" : "Female"}</div>
         </div>
         <div class="wrap_option_btn">
             <div class="delete_btn option_btn" data-id="${this.account_id}" data-email="${this.account_email}">Delete</div>
             <div class="edit_btn option_btn" data-id="${this.account_id}">Edit</div>
-            <div class="view_btn option_btn">View</div>
         </div>
     </div>
     `;

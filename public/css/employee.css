@@ -17,7 +17,7 @@
 }
 .bar_format {
 	display: grid;
-	grid-template-columns: 50px 100px 220px 200px 150px 90px 320px 1fr;
+	grid-template-columns: 50px 100px 220px 200px 150px 90px 320px 100px 1fr;
 	align-items: center;
 }
 .wrap_employee_bar {
@@ -63,7 +63,7 @@
 	border-top-color: var(--main-cl);
 	position: relative;
 	overflow: hidden;
-	padding-bottom: 30px;
+	padding-bottom: 45px;
 }
 .wrap_option_btn {
 	display: flex;
@@ -88,9 +88,6 @@
 }
 .edit_btn {
 	background-color: var(--pale-yel-cl);
-}
-.view_btn {
-	background-color: var(--pale-gre-cl);
 }
 #wrap-fillers-kit {
 	position: fixed;
