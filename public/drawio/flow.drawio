@@ -1,9 +1,12 @@
 <mxfile host="65bd71144e">
     <diagram id="diKFScYm17Do9RVY3w7j" name="Page-1">
-        <mxGraphModel dx="2493" dy="1822" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="2010" dy="1609" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
+                <mxCell id="83" style="edgeStyle=none;html=1;" edge="1" parent="1" source="82" target="70">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
                 <mxCell id="29" style="edgeStyle=none;html=1;" parent="1" source="3" target="14" edge="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
@@ -161,6 +164,52 @@
                 </mxCell>
                 <mxCell id="19" value="POST&lt;br&gt;/dashboard" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" parent="58" vertex="1">
                     <mxGeometry x="55" y="55" width="90" height="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="71" value="routes" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#CCCC00;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.file;" vertex="1" parent="1">
+                    <mxGeometry x="1290" y="-479.9999999999998" width="36.8" height="50.8" as="geometry"/>
+                </mxCell>
+                <mxCell id="73" style="edgeStyle=none;html=1;" edge="1" parent="1" source="86" target="74">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1571.6" y="-360.0000000000002" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="85" style="edgeStyle=none;html=1;" edge="1" parent="1" source="74" target="84">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="74" value="viewR" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#CCCC00;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.file;" vertex="1" parent="1">
+                    <mxGeometry x="1570" y="-309.9999999999998" width="36.8" height="50.8" as="geometry"/>
+                </mxCell>
+                <mxCell id="80" style="edgeStyle=none;html=1;" edge="1" parent="1" source="79" target="71">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="79" value="" style="verticalLabelPosition=bottom;sketch=0;aspect=fixed;html=1;verticalAlign=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.laptop_2;fillColor=none;" vertex="1" parent="1">
+                    <mxGeometry x="1250.4" y="-720" width="116" height="86.5" as="geometry"/>
+                </mxCell>
+                <mxCell id="82" value="Xác định đây là ai và thiết lập layout hiển thị" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="1490" y="-760" width="270" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="84" value="viewC" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#CCCC00;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.file;" vertex="1" parent="1">
+                    <mxGeometry x="1760" y="-309.9999999999998" width="36.8" height="50.8" as="geometry"/>
+                </mxCell>
+                <mxCell id="88" style="edgeStyle=none;html=1;" edge="1" parent="1" source="71" target="70">
+                    <mxGeometry relative="1" as="geometry">
+                        <mxPoint x="1531.6" y="-400.0000000000002" as="sourcePoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="91" style="edgeStyle=none;html=1;" edge="1" parent="1" source="90" target="86">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="90" value="Xác định quyền truy cập" style="text;html=1;strokeColor=none;fillColor=default;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+                    <mxGeometry x="1620" y="-720" width="270" height="40" as="geometry"/>
+                </mxCell>
+                <mxCell id="70" value="whoIs" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#CCCC00;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.file;" vertex="1" parent="1">
+                    <mxGeometry x="1440" y="-479.9999999999998" width="36.8" height="50.8" as="geometry"/>
+                </mxCell>
+                <mxCell id="89" style="edgeStyle=none;html=1;" edge="1" parent="1" source="70" target="86">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="86" value="authorize" style="shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#CCCC00;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.file;" vertex="1" parent="1">
+                    <mxGeometry x="1570" y="-479.9999999999998" width="36.8" height="50.8" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

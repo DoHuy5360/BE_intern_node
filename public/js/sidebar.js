@@ -11,7 +11,7 @@ navigateLinks.forEach((link) => {
 		switch (dataLink) {
 			case "dashboard":
 				const token = localStorage.getItem("token");
-				fetch("/dashboard", {
+				fetch("/view/dashboard", {
 					method: "POST",
 					headers: {
 						Authorization: `Bearer ${token}`,
@@ -20,14 +20,14 @@ navigateLinks.forEach((link) => {
 					.then((res) => res.text())
 					.then((html) => {
 						bodyContent.innerHTML = html;
-						window.history.replaceState(null, "", "/dashboard");
+						window.history.replaceState(null, "", "/view/dashboard");
 					})
 					.finally(() => {
 						getDashboardData();
 					});
 				break;
 			case "employee":
-				fetch("/employee", {
+				fetch("/view/employee", {
 					method: "POST",
 				})
 					.then((res) => res.text())
@@ -40,7 +40,7 @@ navigateLinks.forEach((link) => {
 				break;
 
 			case "schedule":
-				fetch("/schedule", {
+				fetch("/view/schedule", {
 					method: "POST",
 				})
 					.then((res) => res.text())
@@ -52,7 +52,7 @@ navigateLinks.forEach((link) => {
 					});
 				break;
 			case "headquarter":
-				fetch("/headquarter", {
+				fetch("/view/headquarter", {
 					method: "POST",
 				})
 					.then((res) => res.text())

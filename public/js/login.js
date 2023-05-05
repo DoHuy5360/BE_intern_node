@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 	loginForm.addEventListener("submit", async (e) => {
 		e.preventDefault();
 		await setJwtToken("/api/v2/login", { email: inpEmail.value, password: inpPassword.value });
-		await fetch("/dashboard", {
+		await fetch("/view/dashboard", {
 			headers: {
 				Authorization: `Bearer ${localStorage.getItem("token")}`,
 			},

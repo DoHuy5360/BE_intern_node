@@ -24,16 +24,16 @@ const postHeadquarter = (req, res) => {
 };
 
 const getDashboard = (req, res) => {
-	res.render("dashboard", { title: "Dashboard", layout: "main" });
+	res.render("dashboard", { title: "Dashboard", layout: req.layout });
 };
 const getEmployee = (req, res) => {
-	res.render("employee", { title: "Employee", layout: "main" });
+	res.render("employee", { title: "Employee", layout: req.layout });
 };
 const getSchedule = (req, res) => {
-	res.render("schedule", { title: "Schedule", layout: "main" });
+	res.render("schedule", { title: "Schedule", layout: req.layout });
 };
 const getHeadquarter = (req, res) => {
-	res.render("headquarter", { title: "Headquarter", layout: "main" });
+	res.render("headquarter", { title: "Headquarter", layout: req.layout });
 };
 
 export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule, postHeadquarter, getHeadquarter };

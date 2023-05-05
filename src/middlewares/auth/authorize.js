@@ -39,4 +39,16 @@ function handleRequest(req, next, res, roles) {
 		res.send("Missing Token");
 	}
 }
-export { adminAuthorization, userAuthorization, userAuthorizationReloadPage };
+
+function adminAuthorize(req, res, next) {
+	if (req.alias === "Admin") {
+		next();
+	}
+}
+function userAuthorize(req, res, next) {
+	if (req.alias === "User") {
+		next();
+	}
+}
+
+export { adminAuthorization, userAuthorization, userAuthorizationReloadPage, adminAuthorize, userAuthorize };

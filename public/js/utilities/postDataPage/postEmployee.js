@@ -24,7 +24,7 @@ async function getListUser() {
 			}
 		})
 		.finally(() => {
-			window.history.replaceState(null, "", "/employee");
+			window.history.replaceState(null, "", "/view/employee");
 			multiAddClick(".delete_btn", async (btn, e) => {
 				e.stopImmediatePropagation();
 				const isAccept = await popUp(`Delete This Account?<br>${btn.getAttribute("data-email")}`);

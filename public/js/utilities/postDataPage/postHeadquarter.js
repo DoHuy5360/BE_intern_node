@@ -31,7 +31,7 @@ async function getHeadquarterData() {
 			});
 		})
 		.finally(() => {
-			window.history.replaceState("", null, "/headquarter");
+			window.history.replaceState("", null, "/view/headquarter");
 			multiAddClick(".del_option", async (ths) => {
 				const hqtId = ths.getAttribute("data-del-id");
 				const isAccept = await popUp(`Delete this Headquarter?<br>${ths.getAttribute("data-hqt-name")}`);

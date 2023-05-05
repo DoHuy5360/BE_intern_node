@@ -1,0 +1,72 @@
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<script src="https://kit.fontawesome.com/22e1005e84.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="/css/popup.css">
+	<title>{{title}}</title>
+	<style>
+		:root{
+			--main-cl : #FFFFFF;
+			--sub-cl: #EDEDED;
+			--pale-gray-cl: #eaeaea;
+			--gray-cl: #939393; 
+			--pale-red-cl: #f8baba;
+			--pale-yel-cl: #eeee00;
+			--pale-gre-cl: #a8eda1;
+			--gre-cl: #49c73b;
+		}
+		*:not(ul,ol,li) {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", Helvetica, Arial, sans-serif;
+		}
+		::-webkit-scrollbar {
+			width: 10px; 
+			height: 10px;
+			background-color: var(--main);
+		}
+
+		::-webkit-scrollbar-track {
+			background: var(--main-cl);
+		}
+
+		::-webkit-scrollbar-thumb {
+		background: var(--pale-gray-cl);
+		}
+
+		::-webkit-scrollbar-thumb:hover {
+		background: var(--gray-cl);
+		}
+		#main-layout{
+			display: flex;
+			flex-direction: column;
+			height: 100vh;
+			width: 100vw;
+			overflow: hidden;
+		}
+		#body-layout{
+			display: flex;
+			height: calc(100% - 45px);
+		}
+		#content-body{
+		
+			width: 100%;
+		}
+		#content-body::-webkit-scrollbar{
+			width: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="main-layout">
+		{{>header}}
+		<div id="body-layout">
+			{{>adminSidebar}}
+			<div id="content-body">
+				{{{body}}}
+			</div>
+		</div>
+	</div>
+</body>

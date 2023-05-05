@@ -189,7 +189,7 @@ async function requestSchedule(year, month) {
 			allWrapJump = document.querySelectorAll(".ws_fast_jump");
 		})
 		.finally(() => {
-			window.history.replaceState(null, "", "/schedule");
+			window.history.replaceState(null, "", "/view/schedule");
 			const wrapUserSchedule = document.querySelectorAll(".wrap_user_schedule");
 			const wrapUserInfor = document.querySelectorAll(".wrap_user_infor");
 			const filterInput = document.querySelectorAll(".filter_input");

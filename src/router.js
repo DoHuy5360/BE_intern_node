@@ -10,6 +10,9 @@ import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import whoIs from "./middlewares/whoIs.js";
+import { adminAuthorize } from "./middlewares/auth/authorize.js";
+import { login, loginPost } from "./controllers/view/viewC.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -36,10 +39,14 @@ app.use(bodyParser.json());
 app.use(cors(corsOption));
 app.use(cookieParser());
 app.use(express.static("public"));
-app.use("/", viewR);
+
+app.get("/login", login);
+app.post("/login", loginPost);
+
+app.use("/view", whoIs, adminAuthorize, viewR);
 
 app.use("/api/v2/login", authentication, loginR);
-app.use("/api/v2/index", adminAuthorization, indexR);
+app.use("/api/v2/index", indexR);
 app.use("/api/v2/account", accountR);
 app.use("/api/v2/employee", employeeR);
 app.use("/api/v2/headquarter", headquarterR);

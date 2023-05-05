@@ -1,14 +1,24 @@
 import jwt from "jsonwebtoken";
 function verifyJWT(token) {
-	const decoded = jwt.verify(token, process.env.JWT_KEY, { ignoreExpiration: true });
+	let decoded;
+	const verifyConditions = {
+		isLive: false,
+		isMatchSign: true,
+	};
+	try {
+		decoded = jwt.verify(token, process.env.JWT_KEY, { ignoreExpiration: true });
+	} catch (error) {
+		verifyConditions.isMatchSign = false;
+	}
 	console.log(decoded);
 	const expirationTime = decoded.exp;
 	const currentTime = Math.floor(Date.now() / 1000);
-	const result = {
-		isExpires: expirationTime && expirationTime < currentTime ? false : true,
+	verifyConditions.isLive = expirationTime && expirationTime < currentTime ? false : true;
+	return {
+		isVerify: verifyConditions.isLive || verifyConditions.isMatchSign,
+		verifyConditions,
 		content: decoded,
 	};
-	return result;
 }
 function generateJWT(payload, expire) {
 	const options = {
