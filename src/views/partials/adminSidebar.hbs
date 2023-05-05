@@ -1,19 +1,32 @@
 <link rel="stylesheet" href="/css/sidebar.css" />
+<link rel="stylesheet" href="/css/sidebar/adminSidebar.css" />
 <div id="wrap-full-sidebar">
 	<div id="wrap-navidgate">
-		<div class="navigate_link" data-link="dashboard">
+		<div class="navigate_link selectable" data-link="dashboard">
 			<div class="navigate_icon"><i class="fa-solid fa-chart-simple"></i></div>
 			<div class="navigate_name">Dashboard</div>
 		</div>
-		<div class="navigate_link" data-link="schedule">
+		<div class="navigate_link selectable" data-link="schedule">
 			<div class="navigate_icon"><i class="fa-solid fa-calendar"></i></div>
 			<div class="navigate_name">Schedule</div>
 		</div>
-		<div class="navigate_link" data-link="employee">
-			<div class="navigate_icon"><i class="fa-solid fa-users"></i></div>
-			<div class="navigate_name">Employee</div>
+		<div class="wrap_multi_choice">
+			<div class="navigate_link">
+				<div class="navigate_icon"><i class="fa-solid fa-users"></i></div>
+				<div class="navigate_name">Employee</div>
+			</div>
+			<div class="multi_choice">
+				<div class="navigate_link selectable" data-link="employee">
+					<div class="navigate_icon"><i class="fa-solid fa-list-ul"></i></div>
+					<div class="navigate_name">View</div>
+				</div>
+				<div class="navigate_link selectable" data-link="add-employee">
+					<div class="navigate_icon"><i class="fa-solid fa-user-plus"></i></div>
+					<div class="navigate_name">Add</div>
+				</div>
+			</div>
 		</div>
-		<div class="navigate_link" data-link="headquarter">
+		<div class="navigate_link selectable" data-link="headquarter">
 			<div class="navigate_icon"><i class="fa-solid fa-building"></i></div>
 			<div class="navigate_name">Headquarter</div>
 		</div>

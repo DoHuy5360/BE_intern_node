@@ -1,0 +1,25 @@
+.wrap_multi_choice {
+	overflow: hidden;
+}
+.wrap_multi_choice.selected .multi_choice {
+	display: flex;
+}
+.multi_choice {
+	display: none;
+	flex-direction: column;
+	background-color: var(--sub-cl);
+	position: relative;
+	z-index: 1;
+	animation: trans-top-bot 300ms ease-in-out;
+}
+.multi_choice .navigate_link {
+	padding-left: 40px;
+}
+@keyframes trans-top-bot {
+	0% {
+		transform: translateY(-100%);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}

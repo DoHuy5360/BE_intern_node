@@ -1,12 +1,18 @@
+import { multiAddClick } from "./utilities/actions.js";
 import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
 import { getListUser } from "./utilities/postDataPage/postEmployee.js";
 import { getHeadquarterData } from "./utilities/postDataPage/postHeadquarter.js";
 import { requestScheduleData } from "./utilities/postDataPage/postSchedule.js";
 
-const navigateLinks = document.querySelectorAll(".navigate_link");
+multiAddClick(".wrap_multi_choice", (ths) => {
+	ths.classList.toggle("selected");
+});
+
+const navigateLinks = document.querySelectorAll(".navigate_link.selectable");
 const bodyContent = document.querySelector("#content-body");
 navigateLinks.forEach((link) => {
 	link.addEventListener("click", async (e) => {
+		e.stopImmediatePropagation();
 		const dataLink = link.getAttribute("data-link");
 		switch (dataLink) {
 			case "dashboard":
@@ -61,6 +67,19 @@ navigateLinks.forEach((link) => {
 					})
 					.finally(() => {
 						getHeadquarterData();
+					});
+				break;
+			case "add-employee":
+				fetch("/view/add/employee", {
+					method: "POST",
+				})
+					.then((res) => res.text())
+					.then((html) => {
+						bodyContent.innerHTML = html;
+					})
+					.finally(() => {
+						window.history.replaceState(" ", null, "/view/add/employee");
+						// getHeadquarterData();
 					});
 				break;
 		}

@@ -18,6 +18,8 @@
 	transition: 100ms ease-in-out;
 	padding: 10px 15px;
 	text-align: center;
+	position: relative;
+	z-index: 2;
 }
 .navigate_link:hover {
 	background-color: var(--main-cl);
