@@ -1,0 +1,33 @@
+.wrap_hqt_options {
+	background-color: var(--sub-cl);
+	outline: 1px solid var(--sub-cl);
+	flex-direction: column;
+	gap: 1px;
+	display: none;
+	overflow-y: scroll;
+	height: 85px;
+}
+.hgt_option {
+	font-size: 0.9rem;
+	background-color: var(--main-cl);
+	padding: 7px 5px;
+	cursor: pointer;
+}
+.hgt_option:hover {
+	background-color: var(--sub-cl);
+}
+.wrap_hqt_options_partial {
+	position: relative;
+}
+.wrap_hqt_options_partial:has(.select_inp.selected) .wrap_hqt_options {
+	display: flex;
+}
+.select_inp {
+	outline: unset;
+	border: unset;
+	background-color: var(--sub-cl);
+	border-radius: 2px;
+	padding: 5px;
+	cursor: pointer;
+	width: 100%;
+}

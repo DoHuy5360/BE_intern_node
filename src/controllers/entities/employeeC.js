@@ -39,15 +39,9 @@ const createOne = async (req, res) => {
 	//* ::INTEGER ( Varchar -> int )
 	const { accountEmail, accountPassword, accountRole, headquarterId, employeePosition } = req.body;
 
-	await employeeCRUDTemplate.create({
-		employee_id: uuidPrefix("NV"),
-		employee_position: employeePosition,
-		headquarter_id: headquarterId,
-		create_at: getTimeZ(),
-		update_at: getTimeZ(),
-	});
-	await accountCRUDTemplate.create({
-		account_id: uuidPrefix("TK"),
+	const accountId = uuidPrefix("TK");
+	const account = await accountCRUDTemplate.create({
+		account_id: accountId,
 		account_role: accountRole,
 		account_email: accountEmail,
 		account_password: bcryptEncoder(accountPassword),
@@ -55,7 +49,27 @@ const createOne = async (req, res) => {
 		update_at: getTimeZ(),
 	});
 
-	res.send("Success");
+	const employee = await employeeCRUDTemplate.create({
+		employee_id: uuidPrefix("NV"),
+		account_id: accountId,
+		headquarter_id: headquarterId,
+		employee_position: employeePosition,
+		create_at: getTimeZ(),
+		update_at: getTimeZ(),
+	});
+
+	if (employee.created === 1 && account.created === 1) {
+		res.send({
+			status: 200,
+			created: 1,
+		});
+	} else {
+		res.send({
+			status: 400,
+			employee_created: employee.created,
+			account_created: account.created,
+		});
+	}
 };
 const getAllName = (req, res) => {
 	pool.query(

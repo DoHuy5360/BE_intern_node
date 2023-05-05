@@ -26,7 +26,7 @@ class CRUDTemplate {
 		);
 		return {
 			status: 200,
-			stored: result.rowCount,
+			created: result.rowCount,
 		};
 	}
 	async readAll() {

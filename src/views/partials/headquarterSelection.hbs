@@ -1,0 +1,12 @@
+<link rel="stylesheet" href="/css/headquarter/headquarterSelection.css" />
+
+<div class="wrap_hqt_options_partial">
+	<input class="hidden_inp {{this.className}}" type="hidden" name="headquarter" />
+	<input class="select_inp" id="{{this.idName}}" type="text" placeholder="Select Headquarter" required />
+	<div class="wrap_hqt_options">
+		{{#each this.choices}}
+			<div class="hgt_option" data-hqt-id="{{headquarter_id}}">{{headquarter_name}}</div>
+		{{/each}}
+	</div>
+</div>
+<script src="/js/headquarter/headquarterSelection.js"></script>

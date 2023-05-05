@@ -1,33 +1,42 @@
-<link rel="stylesheet" href="/css/employee/addEmployee.css" />
 <div id="wrap-add-ely">
 	<div id="wrap-add">
 		<div class="wrap_add_type">
 			<div class="add_ely_title">Multiple Add</div>
-			<div></div>
+			<div>
+				{{!-- {{> headquarterSelection headquarters}} --}}
+			</div>
 		</div>
-		<div class="wrap_add_type">
+		<form class="wrap_add_type" id="add-one-form">
 			<div class="add_ely_title">Add One</div>
 			<div id="wrap-form-input">
 				<div id="form-input">
 					<div class="wrap_inputs">
-						<label for="">Email</label>
-						<input id="" class="add_ely_inp" type="text" value="@gmail.com" />
+						<label for="ipn-add-email">Email</label>
+						<input id="ipn-add-email" class="add_ely_inp" type="text" name="email" required/>
 					</div>
 					<div class="wrap_inputs">
-						<label for="">Password</label>
-						<input id="" class="add_ely_inp" type="password" value="a" />
+						<label for="ipn-add-psw">Password</label>
+						<input id="ipn-add-psw" class="add_ely_inp" type="password" name="password"  required/>
 					</div>
 					<div class="wrap_inputs">
-						<label for="">Position</label>
-						<input id="" class="add_ely_inp" type="text" value="Employee" />
+						<label for="ipn-add-posi">Position</label>
+						<input id="ipn-add-posi" class="add_ely_inp" type="text" name="position"  required />
 					</div>
 					<div class="wrap_inputs">
-						<label for="">Headquarter</label>
-						<input id="" class="add_ely_inp" type="text" />
+						<label for="ipn-add-role">Role</label>
+						<input id="ipn-add-role" class="add_ely_inp" type="text" name="role"  required/>
+					</div>
+					<div class="wrap_inputs">
+						<label for="ipn-add-hqt">Headquarter</label>
+						{{> headquarterSelection choices=headquarters className="add_ely_inp" idName="ipn-add-hqt"}}
 					</div>
 				</div>
-				<button id="submit-add-ely" type="submit">Add</button>
+				<div class="wrap_add_ely_btn">
+					<button class="add_ely_btn" type="reset">Clear</button>
+					<button class="add_ely_btn" type="submit">Add</button>
+				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
+<script type="module" src="/js/addEmployee.js"></script>

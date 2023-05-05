@@ -16,8 +16,8 @@ const postDashboard = (req, res) => {
 const postEmployee = (req, res) => {
 	res.render("employee", { title: "Employees", layout: false });
 };
-const postAddEmployee = (req, res) => {
-	res.render("addEmployee", { title: "Add Employees", layout: false });
+const postAddEmployee = async (req, res) => {
+	res.render("addEmployee", { title: "Add Employees", layout: false, headquarters: req.headquarters.records });
 };
 const postSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: false });
@@ -32,8 +32,8 @@ const getDashboard = (req, res) => {
 const getEmployee = (req, res) => {
 	res.render("employee", { title: "Employee", layout: req.layout });
 };
-const getAddmployee = (req, res) => {
-	res.render("addEmployee", { title: "Add Employee", layout: req.layout });
+const getAddemployee = (req, res) => {
+	res.render("addEmployee", { title: "Add Employee", layout: req.layout, headquarters: req.headquarters.records });
 };
 const getSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: req.layout });
@@ -42,4 +42,4 @@ const getHeadquarter = (req, res) => {
 	res.render("headquarter", { title: "Headquarter", layout: req.layout });
 };
 
-export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule, postHeadquarter, getHeadquarter, postAddEmployee, getAddmployee };
+export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule, postHeadquarter, getHeadquarter, postAddEmployee, getAddemployee };

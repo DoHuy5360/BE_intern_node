@@ -21,9 +21,9 @@ async function fetchBody(url, body, method) {
 async function getRequest(url) {
 	return (await fetchNoBody(url, "GET")).json();
 }
-async function postRequest(url) {
-	const res = await fetchBody(url, "POST");
-	return res.json();
+async function postRequest(url, body) {
+	const res = await fetchBody(url, body, "POST");
+	return res.created === 1 ? true : false;
 }
 async function putRequest(url, body) {
 	const res = await fetchBody(url, body, "PUT");

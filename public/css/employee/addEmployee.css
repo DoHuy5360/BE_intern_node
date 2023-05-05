@@ -20,13 +20,6 @@
 	flex-direction: column;
 	gap: 10px;
 }
-#submit-add-ely {
-	all: unset;
-	padding: 5px 10px;
-	border-radius: 2px;
-	cursor: pointer;
-	background-color: var(--pale-gre-cl);
-}
 .wrap_inputs {
 	display: flex;
 	flex-direction: column;
@@ -53,4 +46,22 @@
 	padding: 5px;
 	width: 300px;
 	background-color: var(--sub-cl);
+}
+
+.add_ely_btn {
+	all: unset;
+	padding: 5px 10px;
+	border-radius: 2px;
+	cursor: pointer;
+}
+.add_ely_btn[type="reset"] {
+	background-color: var(--pale-gray-cl);
+}
+.add_ely_btn[type="submit"] {
+	background-color: var(--pale-gre-cl);
+}
+.wrap_add_ely_btn {
+	display: flex;
+	gap: 60px;
+	align-items: center;
 }

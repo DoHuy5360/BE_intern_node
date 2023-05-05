@@ -65,4 +65,4 @@ const getHeadquarterAndEmployee = (req, res) => {
 };
 const method4 = (req, res) => {};
 
-export { showAll, showOne, updateOne, deleteOne, createOne, getHeadquarterAndEmployee };
+export { headquarterCRUDTemplate, showAll, showOne, updateOne, deleteOne, createOne, getHeadquarterAndEmployee };

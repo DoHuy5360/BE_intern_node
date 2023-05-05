@@ -18,7 +18,7 @@
 	align-items: center;
 	padding: 10px 0;
 }
-.info-bar:hover {
+.info_bar:hover {
 	background-color: var(--sub-cl);
 	cursor: pointer;
 }
