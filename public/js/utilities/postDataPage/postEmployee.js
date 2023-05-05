@@ -57,9 +57,9 @@ async function getListUser() {
 					}
 				});
 			});
-			const arrayWrapars = document.querySelectorAll("#list-employee .wrap_employee_bar");
-			const arrayBars = document.querySelectorAll(".info-bar");
-			multiAddClick(".info-bar", (ths) => {
+			const arrayWrapars = document.querySelectorAll("#list-employee .info_bar");
+			const arrayBars = document.querySelectorAll(".info_bar");
+			multiAddClick(".info_bar", (ths) => {
 				const accountId = ths.getAttribute("data-bar");
 				const foundAc = dataRecords.find((rec) => {
 					return rec.account_id === accountId;
@@ -111,7 +111,7 @@ function handleFilter(inputValue, type, arrayBars, arrayWrapars) {
 			}
 		}
 		if (arrayConditions.every((condition) => condition === true)) {
-			filterTray.push(bar.parentNode);
+			filterTray.push(bar);
 		}
 	});
 	return filterTray.length === 0 ? arrayWrapars : filterTray;
@@ -147,7 +147,7 @@ async function popUp(message) {
 
 function createEmplyeeInfoBar() {
 	return `
-	<div class="bar_format info-bar" data-bar="${this.account_id}">
+	<div class="bar_format info_bar" data-bar="${this.account_id}">
 		<div>${this.idx + 1}</div>
 		<div data-name="id">${this.account_id}</div>
 		<div data-name="name">${this.employee_name}</div>
