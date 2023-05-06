@@ -24,11 +24,11 @@
 					</div>
 					<div class="wrap_inputs">
 						<label for="ipn-add-role">Role</label>
-						<input id="ipn-add-role" class="add_ely_inp" type="text" name="role"  required/>
+						{{> combobox/roles choices=roles className="add_ely_inp" idName="ipn-add-role"}}
 					</div>
 					<div class="wrap_inputs">
 						<label for="ipn-add-hqt">Headquarter</label>
-						{{> headquarterSelection choices=headquarters className="add_ely_inp" idName="ipn-add-hqt"}}
+						{{> combobox/headquarters choices=headquarters className="add_ely_inp" idName="ipn-add-hqt"}}
 					</div>
 				</div>
 				<div class="wrap_add_ely_btn">

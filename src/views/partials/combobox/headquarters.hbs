@@ -1,0 +1,9 @@
+<div class="wrap_combobox_partial">
+	<input class="hidden_inp {{this.className}}" type="hidden" name="headquarter" />
+	<input class="select_inp" id="{{this.idName}}" type="text" placeholder="Select Headquarter" required />
+	<div class="wrap_cbx_options">
+		{{#each this.choices}}
+			<div class="cbx_option" data-hqt-id="{{headquarter_id}}">{{headquarter_name}}</div>
+		{{/each}}
+	</div>
+</div>

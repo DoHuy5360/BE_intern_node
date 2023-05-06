@@ -64,7 +64,6 @@ async function getListUser() {
 				const foundAc = dataRecords.find((rec) => {
 					return rec.account_id === accountId;
 				});
-				console.log(foundAc);
 				document.body.insertAdjacentHTML("beforeend", createElyViewForm.call(foundAc));
 			});
 			const filterInputs = document.querySelectorAll(".filter_input");

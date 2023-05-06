@@ -3,6 +3,7 @@ import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
 import { getListUser } from "./utilities/postDataPage/postEmployee.js";
 import { getHeadquarterData } from "./utilities/postDataPage/postHeadquarter.js";
 import { requestScheduleData } from "./utilities/postDataPage/postSchedule.js";
+import { replaceScript } from "./utilities/replace.js";
 
 multiAddClick(".wrap_multi_choice", (ths) => {
 	ths.classList.toggle("selected");
@@ -80,6 +81,7 @@ navigateLinks.forEach((link) => {
 					.finally(() => {
 						window.history.replaceState(" ", null, "/view/add/employee");
 						// getHeadquarterData();
+						replaceScript("/js/combobox/general.js");
 					});
 				break;
 		}

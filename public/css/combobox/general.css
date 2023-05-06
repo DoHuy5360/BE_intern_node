@@ -1,4 +1,4 @@
-.wrap_hqt_options {
+.wrap_cbx_options {
 	background-color: var(--sub-cl);
 	outline: 1px solid var(--sub-cl);
 	flex-direction: column;
@@ -7,19 +7,19 @@
 	overflow-y: scroll;
 	height: 85px;
 }
-.hgt_option {
+.cbx_option {
 	font-size: 0.9rem;
 	background-color: var(--main-cl);
 	padding: 7px 5px;
 	cursor: pointer;
 }
-.hgt_option:hover {
+.cbx_option:hover {
 	background-color: var(--sub-cl);
 }
-.wrap_hqt_options_partial {
+.wrap_combobox_partial {
 	position: relative;
 }
-.wrap_hqt_options_partial:has(.select_inp.selected) .wrap_hqt_options {
+.wrap_combobox_partial:has(.select_inp.selected) .wrap_cbx_options {
 	display: flex;
 }
 .select_inp {

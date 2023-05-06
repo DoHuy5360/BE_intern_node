@@ -17,7 +17,7 @@ const postEmployee = (req, res) => {
 	res.render("employee", { title: "Employees", layout: false });
 };
 const postAddEmployee = async (req, res) => {
-	res.render("addEmployee", { title: "Add Employees", layout: false, headquarters: req.headquarters.records });
+	res.render("addEmployee", { title: "Add Employees", layout: false, headquarters: req.headquarters.records, roles: req.roles });
 };
 const postSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: false });
@@ -33,7 +33,7 @@ const getEmployee = (req, res) => {
 	res.render("employee", { title: "Employee", layout: req.layout });
 };
 const getAddemployee = (req, res) => {
-	res.render("addEmployee", { title: "Add Employee", layout: req.layout, headquarters: req.headquarters.records });
+	res.render("addEmployee", { title: "Add Employee", layout: req.layout, headquarters: req.headquarters.records, roles: req.roles });
 };
 const getSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: req.layout });

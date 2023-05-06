@@ -1,0 +1,9 @@
+<div class="wrap_combobox_partial">
+	<input class="hidden_inp" type="hidden" />
+	<input class="select_inp {{this.className}}" id="{{this.idName}}" type="text" name="role" placeholder="Select Role" required />
+	<div class="wrap_cbx_options">
+		{{#each this.choices}}
+			<div class="cbx_option">{{role_name}}</div>
+		{{/each}}
+	</div>
+</div>
