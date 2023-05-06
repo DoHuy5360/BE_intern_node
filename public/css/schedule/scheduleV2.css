@@ -1,0 +1,83 @@
+#wrap-sde {
+	padding: 10px;
+}
+
+#wrp-sde-year-month {
+	display: flex;
+	gap: 1px;
+	flex-direction: column;
+	background-color: var(--sub-cl);
+}
+#sde-year,
+#sde-month {
+	background-color: var(--main-cl);
+}
+#wrap-weeks {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr) calc(calc(100% / var(--number-days)) * calc(var(--number-days) - 28));
+	gap: 1px;
+	background-color: var(--sub-cl);
+}
+
+#wrp-sde-tbl {
+	display: flex;
+	gap: 1px;
+	flex-direction: column;
+	width: 100%;
+	background-color: var(--sub-cl);
+	border: 1px solid var(--sub-cl);
+}
+.week_name {
+	width: 100%;
+	text-align: center;
+	background-color: var(--main-cl);
+}
+#wrp-sde-week-days {
+	display: flex;
+	flex-direction: column;
+	gap: 1px;
+	background-color: var(--sub-cl);
+}
+.day_of_week,
+.day_of_month {
+	width: calc(100% / var(--number-days));
+	text-align: center;
+	background-color: var(--main-cl);
+}
+#wrp-days-month,
+#wrp-lst-weeks {
+	display: flex;
+	gap: 1px;
+	background-color: var(--sub-cl);
+}
+.format_grid {
+	display: grid;
+	gap: 1px;
+	grid-template-columns: 200px 1fr;
+	background-color: var(--sub-cl);
+}
+#wrp-sde-dates {
+	/* display: flex; */
+}
+#wrp-sde-body {
+	/* display: flex; */
+}
+.wrp_user_time {
+	display: flex;
+	gap: 1px;
+	background-color: var(--sub-cl);
+}
+.sde_user_name {
+	background-color: var(--main-cl);
+	width: 50%;
+}
+.wrp_time {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	background-color: var(--main-cl);
+}
+.wrp_cells_row {
+	display: flex;
+	flex-direction: column;
+}

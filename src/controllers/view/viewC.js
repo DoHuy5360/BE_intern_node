@@ -22,6 +22,9 @@ const postAddEmployee = async (req, res) => {
 const postSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: false });
 };
+const postScheduleV2 = (req, res) => {
+	res.render("scheduleV2", { title: "Schedule", layout: false, daysWeekArr: req.daysWeekArr, numberDays: req.numberDays });
+};
 const postHeadquarter = (req, res) => {
 	res.render("headquarter", { title: "Schedule", layout: false });
 };
@@ -38,8 +41,11 @@ const getAddemployee = (req, res) => {
 const getSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: req.layout });
 };
+const getScheduleV2 = (req, res) => {
+	res.render("scheduleV2", { title: "Schedule", layout: req.layout, daysWeekArr: req.daysWeekArr, numberDays: req.numberDays });
+};
 const getHeadquarter = (req, res) => {
 	res.render("headquarter", { title: "Headquarter", layout: req.layout });
 };
 
-export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule, postHeadquarter, getHeadquarter, postAddEmployee, getAddemployee };
+export { login, loginPost, admin, getDashboard, postDashboard, postEmployee, getEmployee, postSchedule, getSchedule, postHeadquarter, getHeadquarter, postAddEmployee, getAddemployee, postScheduleV2, getScheduleV2 };

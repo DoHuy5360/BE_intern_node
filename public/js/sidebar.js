@@ -58,6 +58,20 @@ navigateLinks.forEach((link) => {
 						requestScheduleData();
 					});
 				break;
+			case "scheduleV2":
+				fetch("/view/scheduleV2", {
+					method: "POST",
+				})
+					.then((res) => res.text())
+					.then((html) => {
+						bodyContent.innerHTML = html;
+					})
+					.finally(() => {
+						window.history.replaceState(" ", null, "/view/scheduleV2");
+						// replaceScript("/js/combobox/general.js");
+						// requestScheduleData();
+					});
+				break;
 			case "headquarter":
 				fetch("/view/headquarter", {
 					method: "POST",

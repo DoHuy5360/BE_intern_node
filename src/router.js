@@ -6,6 +6,7 @@ import { viewR } from "./routes/view/viewR.js";
 import bodyParser from "body-parser";
 import path from "path";
 import exphbs from "express-handlebars";
+import Handlebars from "handlebars";
 import cookieParser from "cookie-parser";
 
 import { fileURLToPath } from "url";
@@ -34,7 +35,16 @@ app.engine(
 		partialsDir: viewsPath + "/partials",
 	})
 );
-
+Handlebars.registerHelper("range", function (start, end) {
+	const result = [];
+	for (let i = start; i < end; i++) {
+		result.push(i);
+	}
+	return result;
+});
+Handlebars.registerHelper("add", function (origin, bonus) {
+	return origin + bonus;
+});
 app.use(bodyParser.json());
 app.use(cors(corsOption));
 app.use(cookieParser());

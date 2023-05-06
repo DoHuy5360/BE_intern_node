@@ -1,0 +1,53 @@
+<div id="wrap-sde">
+	<div id="wrp-sde-tbl">
+		<div id="wrp-sde-dates" class="format_grid">
+			<div id="wrp-sde-year-month">
+				<div id="sde-year">2023</div>
+				<div id="sde-month">May</div>
+			</div>
+			<div id="wrp-sde-week-days" style="--number-days: {{numberDays}};">
+				<div id="wrap-weeks">
+					<div class="week_name">Week 1</div>
+					<div class="week_name">Week 2</div>
+					<div class="week_name">Week 3</div>
+					<div class="week_name">Week 4</div>
+					<div class="week_name">Week 5</div>
+				</div>
+				<div id="wrp-lst-weeks">
+					{{#each daysWeekArr}}
+						<div class="day_of_week">{{this}}</div>
+					{{/each}}
+				</div>
+
+				<div id="wrp-days-month">
+					{{#each (range 1 (add numberDays 1))}}
+						<div class="day_of_month">{{this}}</div>
+					{{/each}}
+				</div>
+			</div>
+		</div>
+		<div id="wrp-sde-body" class="format_grid">
+			<div class="wrp_user_time">
+				<div class="sde_user_name">Huy</div>
+				<div class="wrp_time">
+					<div>01:00 - 03:00</div>
+					<div>04:00 - 06:00</div>
+					<div>07:00 - 09:00</div>
+					<div>10:00 - 12:00</div>
+					<div>13:00 - 15:00</div>
+					<div>16:00 - 18:00</div>
+					<div>19:00 - 22:00</div>
+				</div>
+			</div>
+			<div class="wrp_cells_row">
+				<div>cell 1</div>
+				<div>cell 2</div>
+				<div>cell 3</div>
+				<div>cell 4</div>
+				<div>cell 5</div>
+				<div>cell 6</div>
+				<div>cell 7</div>
+			</div>
+		</div>
+	</div>
+</div>
