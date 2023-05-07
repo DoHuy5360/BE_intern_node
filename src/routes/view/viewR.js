@@ -4,6 +4,7 @@ import { userAuthorization } from "../../middlewares/middlewarePort.js";
 import { userAuthorizationReloadPage } from "../../middlewares/auth/authorize.js";
 import { injectAllHeadquarters } from "../../middlewares/data/headquarterInjection.js";
 import { injectAllRoles } from "../../middlewares/data/roleInjection.js";
+import { injectAllEmployees } from "../../middlewares/data/employeeInjection.js";
 
 const viewR = Router();
 
@@ -14,14 +15,14 @@ viewR.get("/dashboard", getDashboard);
 viewR.get("/employee", getEmployee);
 viewR.get("/add/employee", injectAllHeadquarters, injectAllRoles, getAddemployee);
 viewR.get("/schedule", getSchedule);
-viewR.get("/scheduleV2", injectTime, getScheduleV2);
+viewR.get("/scheduleV2", injectTime, injectAllEmployees, getScheduleV2);
 viewR.get("/headquarter", getHeadquarter);
 
 viewR.post("/dashboard", postDashboard);
 viewR.post("/employee", postEmployee);
 viewR.post("/add/employee", injectAllHeadquarters, injectAllRoles, postAddEmployee);
 viewR.post("/schedule", postSchedule);
-viewR.post("/scheduleV2", injectTime, postScheduleV2);
+viewR.post("/scheduleV2", injectTime, injectAllEmployees, postScheduleV2);
 viewR.post("/headquarter", postHeadquarter);
 
 function injectTime(req, res, next) {

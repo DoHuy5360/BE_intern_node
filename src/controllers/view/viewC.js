@@ -23,7 +23,7 @@ const postSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: false });
 };
 const postScheduleV2 = (req, res) => {
-	res.render("scheduleV2", { title: "Schedule", layout: false, daysWeekArr: req.daysWeekArr, numberDays: req.numberDays });
+	res.render("scheduleV2", { title: "Schedule", layout: false, daysWeekArr: req.daysWeekArr, numberDays: req.numberDays, allEly: req.allEly });
 };
 const postHeadquarter = (req, res) => {
 	res.render("headquarter", { title: "Schedule", layout: false });
@@ -42,7 +42,7 @@ const getSchedule = (req, res) => {
 	res.render("schedule", { title: "Schedule", layout: req.layout });
 };
 const getScheduleV2 = (req, res) => {
-	res.render("scheduleV2", { title: "Schedule", layout: req.layout, daysWeekArr: req.daysWeekArr, numberDays: req.numberDays });
+	res.render("scheduleV2", { title: "Schedule", layout: req.layout, daysWeekArr: req.daysWeekArr, numberDays: req.numberDays, allEly: req.allEly });
 };
 const getHeadquarter = (req, res) => {
 	res.render("headquarter", { title: "Headquarter", layout: req.layout });

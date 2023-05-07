@@ -3,7 +3,8 @@ function replaceScript(script) {
 	scriptTag.type = "module";
 	scriptTag.src = script;
 	document.body.appendChild(scriptTag);
-	const exitsScript = document.querySelector(`script[src="${script}"`);
+	const exitsScript = document.querySelector(`script[src="${script}"]`);
+
 	exitsScript.remove();
 }
 

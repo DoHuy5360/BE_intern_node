@@ -1,11 +1,11 @@
-<div id="wrap-sde">
+<div id="wrap-sde" style="--number-days: {{numberDays}};">
 	<div id="wrp-sde-tbl">
 		<div id="wrp-sde-dates" class="format_grid">
 			<div id="wrp-sde-year-month">
 				<div id="sde-year">2023</div>
 				<div id="sde-month">May</div>
 			</div>
-			<div id="wrp-sde-week-days" style="--number-days: {{numberDays}};">
+			<div id="wrp-sde-week-days">
 				<div id="wrap-weeks">
 					<div class="week_name">Week 1</div>
 					<div class="week_name">Week 2</div>
@@ -26,28 +26,51 @@
 				</div>
 			</div>
 		</div>
-		<div id="wrp-sde-body" class="format_grid">
-			<div class="wrp_user_time">
-				<div class="sde_user_name">Huy</div>
-				<div class="wrp_time">
-					<div>01:00 - 03:00</div>
-					<div>04:00 - 06:00</div>
-					<div>07:00 - 09:00</div>
-					<div>10:00 - 12:00</div>
-					<div>13:00 - 15:00</div>
-					<div>16:00 - 18:00</div>
-					<div>19:00 - 22:00</div>
+		{{#each allEly}}
+			<div id="wrp-sde-body" class="format_grid" data-ely-id="{{employee_id}}">
+				<div class="wrp_user_time">
+					<div class="sde_user_name">{{employee_name}}</div>
+					<div class="wrp_time">
+						<div class="sde_time_cell">01:00</div>
+						<div class="sde_time_cell">02:00</div>
+						<div class="sde_time_cell">03:00</div>
+						<div class="sde_time_cell">04:00</div>
+						<div class="sde_time_cell">05:00</div>
+						<div class="sde_time_cell">06:00</div>
+						<div class="sde_time_cell">07:00</div>
+						<div class="sde_time_cell">08:00</div>
+						<div class="sde_time_cell">09:00</div>
+						<div class="sde_time_cell">10:00</div>
+						<div class="sde_time_cell">11:00</div>
+						<div class="sde_time_cell">12:00</div>
+						<div class="sde_time_cell">13:00</div>
+						<div class="sde_time_cell">14:00</div>
+						<div class="sde_time_cell">15:00</div>
+						<div class="sde_time_cell">16:00</div>
+						<div class="sde_time_cell">17:00</div>
+						<div class="sde_time_cell">18:00</div>
+						<div class="sde_time_cell">19:00</div>
+						<div class="sde_time_cell">20:00</div>
+						<div class="sde_time_cell">21:00</div>
+						<div class="sde_time_cell">22:00</div>
+						<div class="sde_time_cell">23:00</div>
+						<div class="sde_time_cell">24:00</div>
+					</div>
+				</div>
+				<div class="wrp_cells_row">
+					{{#times 1 24}}
+						{{#with this as |outerThis|}}
+							<div class="sde_cell_row">
+								{{#times 1 ../../numberDays}}
+									<div class="sde_cell_col" data-time="{{outerThis}}-{{this}}"></div>
+								{{/times}}
+							</div>
+						{{/with}}
+					{{/times}}
 				</div>
 			</div>
-			<div class="wrp_cells_row">
-				<div>cell 1</div>
-				<div>cell 2</div>
-				<div>cell 3</div>
-				<div>cell 4</div>
-				<div>cell 5</div>
-				<div>cell 6</div>
-				<div>cell 7</div>
-			</div>
-		</div>
+		{{/each}}
 	</div>
 </div>
+
+<script type="module" src="/js/schedule/scheduleV2.js"></script>

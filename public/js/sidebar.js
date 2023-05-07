@@ -3,6 +3,7 @@ import { getDashboardData } from "./utilities/postDataPage/postDashboard.js";
 import { getListUser } from "./utilities/postDataPage/postEmployee.js";
 import { getHeadquarterData } from "./utilities/postDataPage/postHeadquarter.js";
 import { requestScheduleData } from "./utilities/postDataPage/postSchedule.js";
+import { postScheduleV2 } from "./utilities/postDataPage/postScheduleV2.js";
 import { replaceScript } from "./utilities/replace.js";
 
 multiAddClick(".wrap_multi_choice", (ths) => {
@@ -68,8 +69,7 @@ navigateLinks.forEach((link) => {
 					})
 					.finally(() => {
 						window.history.replaceState(" ", null, "/view/scheduleV2");
-						// replaceScript("/js/combobox/general.js");
-						// requestScheduleData();
+						postScheduleV2();
 					});
 				break;
 			case "headquarter":

@@ -121,4 +121,4 @@ const readAllInfo = (req, res) => {
 };
 const method4 = (req, res) => {};
 
-export { showAll, showOne, updateOne, deleteOne, createOne, getAllName, readAllInfo };
+export { employeeCRUDTemplate, showAll, showOne, updateOne, deleteOne, createOne, getAllName, readAllInfo };

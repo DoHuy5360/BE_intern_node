@@ -30,7 +30,7 @@ class CRUDTemplate {
 		};
 	}
 	async readAll() {
-		const result = await this.handler(`SELECT * FROM ${this.name}`);
+		const result = await this.handler(`SELECT * FROM ${this.name} limit 10`);
 		return {
 			status: 200,
 			numbers: result.rows.length,

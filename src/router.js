@@ -45,6 +45,11 @@ Handlebars.registerHelper("range", function (start, end) {
 Handlebars.registerHelper("add", function (origin, bonus) {
 	return origin + bonus;
 });
+Handlebars.registerHelper("times", function (s, n, block) {
+	var accum = "";
+	for (var i = s; i <= n; i++) accum += block.fn(i);
+	return accum;
+});
 app.use(bodyParser.json());
 app.use(cors(corsOption));
 app.use(cookieParser());
